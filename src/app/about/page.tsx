@@ -1,4 +1,3 @@
-import { getAuthor, urlFor, dataAiHintMap } from '@/lib/supabase';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -6,23 +5,23 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Github, Twitter } from 'lucide-react';
-import { PortableText } from '@/components/blog/PortableText';
 
 export const metadata: Metadata = {
   title: 'About',
   description: 'Learn more about the author of this blog.',
 };
 
-export default async function AboutPage() {
-    const author = await getAuthor();
+const author = {
+    name: 'abde raoufe',
+    image: 'https://i.postimg.cc/FKMsD7S4/Karakuzular.jpg',
+    bio: 'A passionate full-stack developer specializing in the MERN stack and Next.js.',
+    socials: [
+        { name: 'Twitter', url: process.env.NEXT_PUBLIC_SOCIAL_TWITTER || '#' },
+        { name: 'GitHub', url: process.env.NEXT_PUBLIC_SOCIAL_GITHUB || '#' }
+    ],
+};
 
-    if (!author) {
-        return <div className="container mx-auto px-4 py-8">Author not found.</div>;
-    }
-
-    const authorImageUrl = urlFor(author.image);
-    const authorImageHint = dataAiHintMap[author.image.asset._ref] || 'person';
-
+export default function AboutPage() {
     return (
         <div className="container mx-auto px-4 py-12">
             <header className="text-center mb-12">
@@ -35,7 +34,7 @@ export default async function AboutPage() {
                     <div className="md:flex">
                         <div className="md:w-1/3 bg-secondary p-8 flex flex-col items-center justify-center">
                             <Avatar className="w-32 h-32 border-4 border-background shadow-lg mb-4">
-                                <AvatarImage src={authorImageUrl} alt={author.name} data-ai-hint={authorImageHint}/>
+                                <AvatarImage src={author.image} alt={author.name} data-ai-hint="person face"/>
                                 <AvatarFallback className="text-4xl">{author.name.charAt(0)}</AvatarFallback>
                             </Avatar>
                             <h2 className="text-2xl font-headline font-semibold mt-4">{author.name}</h2>
@@ -57,7 +56,7 @@ export default async function AboutPage() {
                             </CardHeader>
                             <CardContent>
                                 <div className="prose dark:prose-invert max-w-none font-body text-muted-foreground">
-                                    <PortableText value={author.bio} />
+                                    <p>{author.bio}</p>
                                 </div>
                             </CardContent>
                         </div>

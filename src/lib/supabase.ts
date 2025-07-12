@@ -172,12 +172,6 @@ export async function getCategories(): Promise<Category[]> {
     return Promise.resolve(mockCategories);
 }
 
-export async function getAuthor(): Promise<Author | null> {
-    // This is a temporary measure to ensure the About page works
-    // until the author data is managed in Supabase.
-    return Promise.resolve(mockAuthor);
-}
-
 // This function is for resolving image URLs. We'll adapt it.
 export function urlFor(source: { asset?: { _ref: string }, url?: string }): string {
     if (source?.url) return source.url; // Use pre-adapted URL if available
