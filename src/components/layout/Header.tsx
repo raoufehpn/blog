@@ -71,17 +71,8 @@ export function Header({ session }: { session: Session | null }) {
                 ))}
               </div>
                <div className="mt-6 pt-6 border-t flex flex-col gap-2">
-                  {session ? (
+                  {session && (
                      <Button onClick={handleLogout} variant="ghost" className="w-full justify-center text-lg">Sign Out</Button>
-                  ) : (
-                    <>
-                      <Button asChild variant="ghost" className="w-full justify-center text-lg">
-                        <Link href="/login" onClick={() => setSheetOpen(false)}>Log In</Link>
-                      </Button>
-                      <Button asChild className="w-full justify-center text-lg">
-                        <Link href="/signup" onClick={() => setSheetOpen(false)}>Sign Up</Link>
-                      </Button>
-                    </>
                   )}
               </div>
             </SheetContent>
@@ -113,10 +104,10 @@ export function Header({ session }: { session: Session | null }) {
                 <DropdownMenuContent className="w-56" align="end" forceMount>
                   <DropdownMenuLabel className="font-normal">
                     <div className="flex flex-col space-y-1">
-                      <p className="text-sm font-medium leading-none">My Account</p>
-                      <p className="text-xs leading-none text-muted-foreground">
+                      <p className="text-sm font-medium leading-none">Admin Account</p>
+                       {session.user.email && <p className="text-xs leading-none text-muted-foreground">
                         {session.user.email}
-                      </p>
+                      </p>}
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
@@ -127,14 +118,7 @@ export function Header({ session }: { session: Session | null }) {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <>
-                <Button asChild variant="ghost">
-                  <Link href="/login">Log In</Link>
-                </Button>
-                <Button asChild>
-                  <Link href="/signup">Sign Up</Link>
-                </Button>
-              </>
+             <div/>
             )}
             <ThemeToggle />
         </div>

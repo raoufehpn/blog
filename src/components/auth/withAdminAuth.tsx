@@ -19,16 +19,10 @@ export function withAdminAuth<P extends object>(WrappedComponent: ComponentType<
           router.push('/login');
           return;
         }
-
-        const userEmail = session.user.email;
-        const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
-
-        if (userEmail === adminEmail) {
-          setIsAdmin(true);
-        } else {
-          setIsAdmin(false);
-          router.push('/'); // Redirect non-admins to homepage
-        }
+        
+        // In this setup, any authenticated session is considered an admin session.
+        // The login page is the gatekeeper.
+        setIsAdmin(true);
       }
 
       checkAdmin();
