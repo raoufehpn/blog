@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, Space_Grotesk, Source_Code_Pro } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/toaster';
@@ -11,29 +11,19 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  variable: '--font-space-grotesk',
-});
-
-const sourceCodePro = Source_Code_Pro({
-  subsets: ['latin'],
-  variable: '--font-source-code-pro',
-});
-
 export const metadata: Metadata = {
   title: {
-    default: 'Sanity & Serenity Blog',
-    template: '%s | Sanity & Serenity Blog',
+    default: 'Untitled UI',
+    template: '%s | Untitled UI',
   },
   description: 'A professional, responsive, SEO-optimized personal blog using Next.js, TypeScript, Tailwind CSS, and Sanity.io.',
   openGraph: {
-    title: 'Sanity & Serenity Blog',
+    title: 'Untitled UI',
     description: 'A modern blog for the modern developer.',
     type: 'website',
     locale: 'en_US',
     url: 'https://your-domain.com', // Replace with your actual domain
-    siteName: 'Sanity & Serenity Blog',
+    siteName: 'Untitled UI',
   },
 };
 
@@ -44,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn("min-h-screen bg-background font-body antialiased", inter.variable, spaceGrotesk.variable, sourceCodePro.variable)}>
+      <body className={cn("min-h-screen bg-background font-sans antialiased", inter.variable)}>
         <div className="relative flex min-h-dvh flex-col bg-background">
           <Header />
           <main className="flex-1">{children}</main>
