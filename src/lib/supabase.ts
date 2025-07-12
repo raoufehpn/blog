@@ -191,7 +191,3 @@ export const dataAiHintMap: { [key: string]: string } = {
     'image-4': 'css framework',
     'https://i.postimg.cc/FKMsD7S4/Karakuzular.jpg': 'person face'
 };
-
-    
-
-    
