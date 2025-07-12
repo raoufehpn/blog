@@ -8,7 +8,7 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 import { useState } from 'react';
 
 const navLinks = [
-  { href: '/category/all', label: 'All Posts' },
+  { href: '/posts', label: 'All Posts' },
   { href: '/about', label: 'About' },
   { href: '#', label: 'Contact' },
 ];
@@ -27,13 +27,13 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center">
-        <div className="mr-4 hidden md:flex">
+        <div className="mr-auto flex md:mr-0 md:flex-none">
             <Link href="/" className="flex items-center">
                 <Logo />
             </Link>
         </div>
         
-        <div className="md:hidden">
+        <div className="md:hidden ml-auto">
           <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" className="px-2" aria-label="Toggle Menu">
@@ -64,11 +64,8 @@ export function Header() {
           </Sheet>
         </div>
 
-        <div className="flex flex-1 items-center justify-center md:justify-center">
-            <Link href="/" className="flex items-center md:hidden">
-                <Logo />
-            </Link>
-            <nav className="items-center gap-6 text-sm hidden md:flex">
+        <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex">
+            <nav className="flex items-center gap-6 text-sm">
                 {navLinks.map((link) => (
                 <Link
                     key={link.label}
@@ -81,11 +78,9 @@ export function Header() {
             </nav>
         </div>
 
-        <div className="flex items-center justify-end gap-2">
-            <div className="hidden md:flex items-center gap-2">
-                <Button variant="ghost">Log In</Button>
-                <Button>Sign Up</Button>
-            </div>
+        <div className="hidden md:flex items-center justify-end gap-2 ml-auto">
+            <Button variant="ghost">Log In</Button>
+            <Button>Sign Up</Button>
             <ThemeToggle />
         </div>
       </div>
