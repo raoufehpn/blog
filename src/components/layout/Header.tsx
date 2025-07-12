@@ -1,11 +1,21 @@
 "use client";
 
 import Link from 'next/link';
-import { Menu } from 'lucide-react';
+import { Menu, UserCircle, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { useState } from 'react';
+import type { Session } from '@supabase/supabase-js';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { logout } from '@/app/auth/actions';
 
 const navLinks = [
   { href: '/posts', label: 'All Posts' },
@@ -21,8 +31,12 @@ const Logo = () => (
 );
 
 
-export function Header() {
+export function Header({ session }: { session: Session | null }) {
   const [isSheetOpen, setSheetOpen] = useState(false);
+
+  const handleLogout = async () => {
+    await logout();
+  }
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -57,8 +71,18 @@ export function Header() {
                 ))}
               </div>
                <div className="mt-6 pt-6 border-t flex flex-col gap-2">
-                  <Button variant="ghost" className="w-full justify-center text-lg">Log In</Button>
-                  <Button className="w-full justify-center text-lg">Sign Up</Button>
+                  {session ? (
+                     <Button onClick={handleLogout} variant="ghost" className="w-full justify-center text-lg">Sign Out</Button>
+                  ) : (
+                    <>
+                      <Button asChild variant="ghost" className="w-full justify-center text-lg">
+                        <Link href="/login" onClick={() => setSheetOpen(false)}>Log In</Link>
+                      </Button>
+                      <Button asChild className="w-full justify-center text-lg">
+                        <Link href="/signup" onClick={() => setSheetOpen(false)}>Sign Up</Link>
+                      </Button>
+                    </>
+                  )}
               </div>
             </SheetContent>
           </Sheet>
@@ -79,8 +103,39 @@ export function Header() {
         </div>
 
         <div className="hidden md:flex items-center justify-end gap-2 ml-auto">
-            <Button variant="ghost">Log In</Button>
-            <Button>Sign Up</Button>
+            {session ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                     <UserCircle className="h-8 w-8" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56" align="end" forceMount>
+                  <DropdownMenuLabel className="font-normal">
+                    <div className="flex flex-col space-y-1">
+                      <p className="text-sm font-medium leading-none">My Account</p>
+                      <p className="text-xs leading-none text-muted-foreground">
+                        {session.user.email}
+                      </p>
+                    </div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
+                    <LogOut className="mr-2 h-4 w-4" />
+                    <span>Log out</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <>
+                <Button asChild variant="ghost">
+                  <Link href="/login">Log In</Link>
+                </Button>
+                <Button asChild>
+                  <Link href="/signup">Sign Up</Link>
+                </Button>
+              </>
+            )}
             <ThemeToggle />
         </div>
       </div>
