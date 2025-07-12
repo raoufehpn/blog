@@ -1,7 +1,8 @@
+
 "use client";
 
 import Link from 'next/link';
-import { Menu, UserCircle, LogOut } from 'lucide-react';
+import { Menu, UserCircle, LogOut, LayoutDashboard } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -81,6 +82,11 @@ export function Header({ session }: { session: Session | null }) {
                     {link.label}
                   </Link>
                 ))}
+                 {session && !isAdmin && (
+                    <Link href="/dashboard" className="transition-colors hover:text-foreground text-foreground/80 text-lg py-2" onClick={() => setSheetOpen(false)}>
+                        Dashboard
+                    </Link>
+                 )}
               </div>
                <div className="mt-6 pt-6 border-t flex flex-col gap-2">
                   {session ? (
@@ -88,10 +94,10 @@ export function Header({ session }: { session: Session | null }) {
                   ) : (
                     <>
                         <Button asChild variant="default" className="w-full justify-center text-lg">
-                            <Link href="/login">Login</Link>
+                            <Link href="/login" onClick={() => setSheetOpen(false)}>Login</Link>
                         </Button>
                         <Button asChild variant="outline" className="w-full justify-center text-lg">
-                            <Link href="/signup">Sign Up</Link>
+                            <Link href="/signup" onClick={() => setSheetOpen(false)}>Sign Up</Link>
                         </Button>
                     </>
                   )}
@@ -132,6 +138,14 @@ export function Header({ session }: { session: Session | null }) {
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
+                  {!isAdmin && (
+                    <DropdownMenuItem asChild className="cursor-pointer">
+                      <Link href="/dashboard">
+                        <LayoutDashboard className="mr-2 h-4 w-4" />
+                        <span>Dashboard</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  )}
                   <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
                     <LogOut className="mr-2 h-4 w-4" />
                     <span>Log out</span>
