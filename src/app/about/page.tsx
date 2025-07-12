@@ -1,4 +1,4 @@
-import { getAuthor, urlFor, dataAiHintMap } from '@/lib/sanity';
+import { getAuthor, urlFor, dataAiHintMap } from '@/lib/supabase';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -10,7 +10,7 @@ import { PortableText } from '@/components/blog/PortableText';
 
 export const metadata: Metadata = {
   title: 'About',
-  description: 'Learn more about the author of Sanity & Serenity.',
+  description: 'Learn more about the author of this blog.',
 };
 
 export default async function AboutPage() {
@@ -40,7 +40,7 @@ export default async function AboutPage() {
                             </Avatar>
                             <h2 className="text-2xl font-headline font-semibold mt-4">{author.name}</h2>
                             <div className="flex space-x-2 mt-4">
-                                {author.socials.map((social) => (
+                                {author.socials?.map((social) => (
                                     <Button key={social.name} variant="ghost" size="icon" asChild>
                                         <Link href={social.url} target="_blank" rel="noopener noreferrer">
                                             {social.name.toLowerCase() === 'twitter' && <Twitter className="h-5 w-5" />}

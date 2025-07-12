@@ -1,4 +1,4 @@
-import { getPostsByCategory, getCategories } from '@/lib/sanity';
+import { getPostsByCategory, getCategories } from '@/lib/supabase';
 import type { Metadata } from 'next';
 import { PostCard } from '@/components/blog/PostCard';
 import { notFound } from 'next/navigation';
@@ -17,15 +17,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CategoryPage({ params }: Props) {
   const categoryTitle = decodeURIComponent(params.category).replace(/-/g, ' ');
-  const posts = await getPostsByCategory(categoryTitle);
+  // "all" is a special case, so we won't try to fetch posts for a category named "all".
+  const posts = params.category === 'all' ? await getPostsByCategory('') : await getPostsByCategory(categoryTitle);
   const categories = await getCategories();
   
   const categoryExists = categories.some(c => c.title.toLowerCase() === categoryTitle.toLowerCase());
   if (params.category !== 'all' && !categoryExists) {
     notFound();
   }
-
-  const allPosts = params.category === 'all' ? await getPostsByCategory('') : posts;
   
   const displayTitle = params.category === 'all' 
     ? "All Categories" 
@@ -43,9 +42,9 @@ export default async function CategoryPage({ params }: Props) {
         </p>
       </header>
 
-      {allPosts.length > 0 ? (
+      {posts.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {allPosts.map((post) => (
+          {posts.map((post) => (
             <PostCard key={post._id} post={post} />
           ))}
         </div>

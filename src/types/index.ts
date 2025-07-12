@@ -4,6 +4,7 @@ export interface SanityImage {
     _ref: string;
     _type: 'reference';
   };
+  url?: string; // Adding optional URL for adapted Supabase data
 }
 
 export interface Slug {

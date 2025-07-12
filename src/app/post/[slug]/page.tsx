@@ -1,9 +1,9 @@
-import { getPost, getPosts } from '@/lib/sanity';
+import { getPost, getPosts } from '@/lib/supabase';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { format } from 'date-fns';
-import { urlFor, dataAiHintMap } from '@/lib/sanity';
+import { urlFor, dataAiHintMap } from '@/lib/supabase';
 import { PortableText } from '@/components/blog/PortableText';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';

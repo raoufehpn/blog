@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { format } from 'date-fns';
 import type { Post } from '@/types';
-import { urlFor, dataAiHintMap } from '@/lib/sanity';
+import { urlFor, dataAiHintMap } from '@/lib/supabase';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 
@@ -19,7 +19,7 @@ export function PostCard({ post }: PostCardProps) {
   return (
     <Link 
       href={`/post/${post.slug.current}`} 
-      className="group block overflow-hidden rounded-lg border bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+      className="group block overflow-hidden rounded-lg border bg-card text-card-foreground transition-all duration-300 shadow-sm hover:shadow-lg hover:-translate-y-1"
     >
       <div className="relative aspect-[16/10] w-full overflow-hidden">
         <Image

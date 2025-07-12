@@ -4,7 +4,7 @@ import type { Post } from '@/types';
 import { PostCard } from '@/components/blog/PostCard';
 import Image from 'next/image';
 import Link from 'next/link';
-import { urlFor, dataAiHintMap } from '@/lib/sanity';
+import { urlFor, dataAiHintMap } from '@/lib/supabase';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -17,6 +17,7 @@ export default function ClientHomePage({ posts }: ClientHomePageProps) {
     return (
       <div className="text-center py-16">
         <h2 className="text-2xl font-semibold">No Posts Found</h2>
+        <p className="text-muted-foreground mt-2">Could not connect to the database or no posts have been created yet.</p>
       </div>
     );
   }
