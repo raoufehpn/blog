@@ -152,7 +152,6 @@ export async function getPosts(): Promise<Post[]> {
 }
 
 export async function getPost(slug: string): Promise<Post | null> {
-  // TODO: Fetch from Supabase
   const post = mockPosts.find((p) => p.slug.current === slug);
   return Promise.resolve(post || null);
 }
