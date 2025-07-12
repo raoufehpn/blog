@@ -1,28 +1,22 @@
 "use client";
 
 import Link from 'next/link';
-import { Menu, ChevronDown } from 'lucide-react';
+import { Menu, ChevronDown, Rss } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { useState } from 'react';
 
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '#', label: 'Products', dropdown: true },
-  { href: '#', label: 'Blog', dropdown: true },
-  { href: '#', label: 'Pricing' },
-  { href: '/about', label: 'About us' },
+  { href: '/category/all', label: 'All Posts' },
+  { href: '/about', label: 'About' },
+  { href: '#', label: 'Contact' },
 ];
 
 const Logo = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-primary">
-    <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M2 7L12 12" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M12 22V12" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M22 7L12 12" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M17 4.5L7 9.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
+    <div className="flex items-center justify-center h-8 w-8 bg-primary rounded-lg text-primary-foreground">
+        <span className="font-bold text-lg">S</span>
+    </div>
 );
 
 
@@ -35,8 +29,8 @@ export function Header() {
         <div className="mr-4 hidden md:flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
             <Logo />
-            <span className="hidden font-bold sm:inline-block">
-              Untitled UI
+            <span className="hidden font-bold sm:inline-block font-headline">
+              Sanity & Serenity
             </span>
           </Link>
           <nav className="flex items-center gap-6 text-sm">
@@ -47,7 +41,6 @@ export function Header() {
                 className="transition-colors hover:text-foreground/80 text-foreground/60 flex items-center gap-1"
               >
                 {link.label}
-                {link.dropdown && <ChevronDown className="h-4 w-4" />}
               </Link>
             ))}
           </nav>
@@ -56,13 +49,15 @@ export function Header() {
           <div className="md:hidden">
             <Link href="/" className="flex items-center space-x-2">
               <Logo />
-              <span className="font-bold">Untitled UI</span>
+              <span className="font-bold font-headline">Sanity & Serenity</span>
             </Link>
           </div>
           <div className="flex items-center gap-2">
             <div className="hidden md:flex items-center gap-2">
-              <Button variant="ghost">Log in</Button>
-              <Button>Sign up</Button>
+                <Button variant="ghost" size="icon">
+                    <Rss className="h-5 w-5" />
+                    <span className="sr-only">Subscribe</span>
+                </Button>
             </div>
             <ThemeToggle />
             <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>
@@ -75,7 +70,7 @@ export function Header() {
               <SheetContent side="left" className="pr-0">
                 <Link href="/" className="mr-6 flex items-center space-x-2 mb-6" onClick={() => setSheetOpen(false)}>
                   <Logo />
-                  <span className="font-bold">Untitled UI</span>
+                  <span className="font-bold font-headline">Sanity & Serenity</span>
                 </Link>
                 <div className="flex flex-col space-y-3">
                   {navLinks.map((link) => (
@@ -86,13 +81,14 @@ export function Header() {
                       onClick={() => setSheetOpen(false)}
                     >
                       {link.label}
-                      {link.dropdown && <ChevronDown className="h-4 w-4" />}
                     </Link>
                   ))}
                 </div>
-                 <div className="mt-6 pt-6 border-t flex flex-col gap-2">
-                    <Button variant="ghost">Log in</Button>
-                    <Button>Sign up</Button>
+                 <div className="mt-6 pt-6 border-t">
+                    <Button variant="ghost" className="w-full justify-start">
+                        <Rss className="h-5 w-5 mr-2" />
+                        Subscribe
+                    </Button>
                 </div>
               </SheetContent>
             </Sheet>

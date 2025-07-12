@@ -5,6 +5,7 @@ import type { Post } from '@/types';
 import { urlFor, dataAiHintMap } from '@/lib/sanity';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ArrowUpRight } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 
 interface PostCardProps {
   post: Post;
@@ -17,8 +18,8 @@ export function PostCard({ post }: PostCardProps) {
   const authorImageHint = dataAiHintMap[post.author.image.asset._ref] || 'person';
 
   return (
-    <Link href={`/post/${post.slug.current}`} className="group flex flex-col">
-      <div className="relative aspect-[3/2] w-full overflow-hidden rounded-xl mb-6">
+    <Link href={`/post/${post.slug.current}`} className="group flex flex-col bg-secondary/30 dark:bg-secondary/50 p-4 rounded-xl border border-transparent hover:border-primary/50 transition-all duration-300">
+      <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg mb-4">
         <Image
           src={postImageUrl}
           alt={post.title}
@@ -29,12 +30,18 @@ export function PostCard({ post }: PostCardProps) {
         />
       </div>
       <div className="flex flex-col flex-grow">
-        <h3 className="font-bold text-2xl leading-snug mb-3 text-balance group-hover:text-primary transition-colors flex justify-between items-start">
+        <div className="flex items-center gap-2 mb-2">
+            {post.categories.slice(0, 1).map((category) => (
+                <Badge key={category._id} variant="default" className="bg-primary/10 text-primary hover:bg-primary/20 dark:bg-primary/20 dark:text-primary dark:hover:bg-primary/30">
+                    {category.title}
+                </Badge>
+            ))}
+        </div>
+        <h3 className="font-bold font-headline text-2xl leading-snug mb-3 text-balance group-hover:text-primary transition-colors">
           {post.title}
-          <ArrowUpRight className="w-5 h-5 text-muted-foreground shrink-0 ml-2 opacity-0 group-hover:opacity-100 transition-opacity" />
         </h3>
         <p className="text-muted-foreground text-base line-clamp-3 mb-6 flex-grow">{post.excerpt}</p>
-        <div className="flex items-center gap-3 text-sm text-muted-foreground">
+        <div className="flex items-center gap-3 text-sm text-muted-foreground mt-auto">
           <Avatar className="h-10 w-10">
             <AvatarImage src={authorImageUrl} alt={post.author.name} data-ai-hint={authorImageHint}/>
             <AvatarFallback>{post.author.name.charAt(0)}</AvatarFallback>

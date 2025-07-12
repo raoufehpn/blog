@@ -1,29 +1,36 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Manrope, Urbanist } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/toaster';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 
-const inter = Inter({
+const manrope = Manrope({
   subsets: ['latin'],
-  variable: '--font-inter',
+  display: 'swap',
+  variable: '--font-body',
+});
+
+const urbanist = Urbanist({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-headline',
 });
 
 export const metadata: Metadata = {
   title: {
-    default: 'Untitled UI',
-    template: '%s | Untitled UI',
+    default: 'Sanity & Serenity',
+    template: '%s | Sanity & Serenity',
   },
   description: 'A professional, responsive, SEO-optimized personal blog using Next.js, TypeScript, Tailwind CSS, and Sanity.io.',
   openGraph: {
-    title: 'Untitled UI',
+    title: 'Sanity & Serenity',
     description: 'A modern blog for the modern developer.',
     type: 'website',
     locale: 'en_US',
-    url: 'https://your-domain.com', // Replace with your actual domain
-    siteName: 'Untitled UI',
+    url: 'https://your-domain.com', 
+    siteName: 'Sanity & Serenity',
   },
 };
 
@@ -33,8 +40,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={cn("min-h-screen bg-background font-sans antialiased", inter.variable)}>
+    <html lang="en" suppressHydrationWarning className="dark">
+      <body className={cn("min-h-screen bg-background font-body antialiased", manrope.variable, urbanist.variable)}>
         <div className="relative flex min-h-dvh flex-col bg-background">
           <Header />
           <main className="flex-1">{children}</main>

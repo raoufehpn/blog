@@ -16,7 +16,7 @@ export default function ClientHomePage({ posts }: ClientHomePageProps) {
   if (!posts || posts.length === 0) {
     return (
       <div className="text-center py-16">
-        <h2 className="text-2xl font-semibold">No Posts Found</h2>
+        <h2 className="text-2xl font-semibold font-headline">No Posts Found</h2>
       </div>
     );
   }
@@ -29,39 +29,43 @@ export default function ClientHomePage({ posts }: ClientHomePageProps) {
 
   return (
     <>
+       <header className="text-center mb-16">
+        <h1 className="text-4xl md:text-6xl font-bold font-headline tracking-tight text-balance">
+          Sanity & Serenity
+        </h1>
+        <p className="text-muted-foreground mt-4 text-lg max-w-2xl mx-auto">
+          A personal blog about modern web development, design, and everything in between.
+        </p>
+      </header>
+
       <section className="mb-16">
         <Link href={`/post/${featuredPost.slug.current}`} className="group block">
-          <div className="relative aspect-[16/9] md:aspect-[2/1] lg:aspect-[2.4/1] w-full rounded-2xl overflow-hidden">
+          <div className="relative aspect-[16/9] md:aspect-[2/1] w-full rounded-2xl overflow-hidden shadow-lg">
             <Image
               src={featuredPostImageUrl}
               alt={featuredPost.title}
               fill
-              className="object-cover"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1400px"
               priority
               data-ai-hint={featuredPostImageHint}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
             <div className="absolute bottom-0 left-0 p-6 md:p-10 text-white w-full md:w-3/4 lg:w-2/3">
-              <p className="font-semibold text-primary-foreground/80 mb-2">Featured</p>
-              <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-primary-foreground text-balance leading-tight">
+              <p className="font-semibold text-primary mb-2">Featured Post</p>
+              <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold font-headline text-primary-foreground text-balance leading-tight">
                 {featuredPost.title}
               </h1>
               <p className="mt-2 md:mt-4 text-sm md:text-base text-primary-foreground/80 hidden md:block">
                 {featuredPost.excerpt}
               </p>
             </div>
-             <div className="absolute bottom-6 right-6 md:bottom-10 md:right-10">
-              <div className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center transition-all duration-300 group-hover:bg-white/10">
-                <ArrowRight className="text-white w-6 h-6" />
-              </div>
-            </div>
           </div>
         </Link>
       </section>
 
       <section>
-        <h2 className="text-3xl font-bold mb-8">Recent blog posts</h2>
+        <h2 className="text-3xl font-bold font-headline mb-8">Recent Posts</h2>
         {otherPosts.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
             {otherPosts.map((post) => (
@@ -74,12 +78,6 @@ export default function ClientHomePage({ posts }: ClientHomePageProps) {
           </div>
         )}
       </section>
-
-      {posts.length > 6 && (
-        <div className="text-center mt-16">
-          <Button variant="outline" size="lg">Loading more...</Button>
-        </div>
-      )}
     </>
   );
 }
