@@ -15,7 +15,7 @@ const navLinks = [
 
 const Logo = () => (
     <div className="flex items-center space-x-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-primary"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>
         <span className="font-bold text-lg sm:text-xl">hpn blog</span>
     </div>
 );
@@ -57,14 +57,14 @@ export function Header() {
                 ))}
               </div>
                <div className="mt-6 pt-6 border-t flex flex-col gap-2">
-                  <Button variant="ghost" className="w-full justify-start text-lg">Log In</Button>
-                  <Button className="w-full justify-start text-lg">Sign Up</Button>
+                  <Button variant="ghost" className="w-full justify-center text-lg">Log In</Button>
+                  <Button className="w-full justify-center text-lg">Sign Up</Button>
               </div>
             </SheetContent>
           </Sheet>
         </div>
 
-        <div className="flex flex-1 items-center justify-center">
+        <div className="flex flex-1 items-center justify-center md:justify-center">
             <Link href="/" className="flex items-center md:hidden">
                 <Logo />
             </Link>
