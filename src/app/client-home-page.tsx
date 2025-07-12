@@ -79,8 +79,8 @@ export default function ClientHomePage({ posts }: ClientHomePageProps) {
       </section>
 
       <div className="text-center mt-16">
-        <Button variant="outline" size="lg">
-          Load more
+        <Button asChild variant="outline" size="lg">
+          <Link href="/posts">Load more</Link>
         </Button>
       </div>
     </>

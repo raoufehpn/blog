@@ -32,8 +32,12 @@ export function Footer() {
             <h2 className="text-3xl font-bold mb-2 text-center">Let's get started on something great</h2>
             <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto text-center">Join over 4,000+ startups already growing with us.</p>
             <div className="flex-shrink-0 flex flex-col sm:flex-row items-center justify-center gap-3">
-                <Button variant="outline" className="w-full sm:w-auto">Chat to us</Button>
-                <Button variant="default" className="w-full sm:w-auto">Get started</Button>
+                <Button variant="outline" className="w-full sm:w-auto" asChild>
+                    <Link href="/contact">Chat to us</Link>
+                </Button>
+                <Button variant="default" className="w-full sm:w-auto" asChild>
+                    <Link href="/posts">Get started</Link>
+                </Button>
             </div>
         </div>
         
