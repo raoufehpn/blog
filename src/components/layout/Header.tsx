@@ -5,7 +5,7 @@ import { Menu, UserCircle, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { Session } from '@supabase/supabase-js';
 import {
   DropdownMenu,
@@ -33,10 +33,22 @@ const Logo = () => (
 
 export function Header({ session }: { session: Session | null }) {
   const [isSheetOpen, setSheetOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  
+  useEffect(() => {
+    const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL || "admin@example.com";
+    if(session?.user?.email === adminEmail) {
+        setIsAdmin(true);
+    } else {
+        setIsAdmin(false);
+    }
+  }, [session]);
 
   const handleLogout = async () => {
     await logout();
   }
+  
+  const allNavLinks = isAdmin ? [...navLinks, { href: '/admin', label: 'Admin' }] : navLinks;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -59,7 +71,7 @@ export function Header({ session }: { session: Session | null }) {
                 <Logo />
               </Link>
               <div className="flex flex-col space-y-3">
-                {navLinks.map((link) => (
+                {allNavLinks.map((link) => (
                   <Link 
                     key={link.label} 
                     href={link.href} 
@@ -71,8 +83,17 @@ export function Header({ session }: { session: Session | null }) {
                 ))}
               </div>
                <div className="mt-6 pt-6 border-t flex flex-col gap-2">
-                  {session && (
+                  {session ? (
                      <Button onClick={handleLogout} variant="ghost" className="w-full justify-center text-lg">Sign Out</Button>
+                  ) : (
+                    <>
+                        <Button asChild variant="default" className="w-full justify-center text-lg">
+                            <Link href="/login">Login</Link>
+                        </Button>
+                        <Button asChild variant="outline" className="w-full justify-center text-lg">
+                            <Link href="/signup">Sign Up</Link>
+                        </Button>
+                    </>
                   )}
               </div>
             </SheetContent>
@@ -81,7 +102,7 @@ export function Header({ session }: { session: Session | null }) {
 
         <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex">
             <nav className="flex items-center gap-6 text-sm">
-                {navLinks.map((link) => (
+                {allNavLinks.map((link) => (
                 <Link
                     key={link.label}
                     href={link.href}
@@ -104,7 +125,7 @@ export function Header({ session }: { session: Session | null }) {
                 <DropdownMenuContent className="w-56" align="end" forceMount>
                   <DropdownMenuLabel className="font-normal">
                     <div className="flex flex-col space-y-1">
-                      <p className="text-sm font-medium leading-none">Admin Account</p>
+                      <p className="text-sm font-medium leading-none">{isAdmin ? "Admin Account" : "User Account"}</p>
                        {session.user.email && <p className="text-xs leading-none text-muted-foreground">
                         {session.user.email}
                       </p>}
@@ -118,7 +139,14 @@ export function Header({ session }: { session: Session | null }) {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-             <div/>
+                <div className="flex items-center gap-2">
+                    <Button asChild variant="ghost" size="sm">
+                        <Link href="/login">Login</Link>
+                    </Button>
+                    <Button asChild size="sm">
+                        <Link href="/signup">Sign Up</Link>
+                    </Button>
+                </div>
             )}
             <ThemeToggle />
         </div>

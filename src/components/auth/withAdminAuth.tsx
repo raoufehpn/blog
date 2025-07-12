@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -14,14 +13,14 @@ export function withAdminAuth<P extends object>(WrappedComponent: ComponentType<
     useEffect(() => {
       async function checkAdmin() {
         const { data: { session }, error } = await supabase.auth.getSession();
+        const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL || "admin@example.com";
 
-        if (error || !session) {
-          router.push('/login');
+        if (error || !session || session.user.email !== adminEmail) {
+          router.push('/admin/login');
+          setIsAdmin(false);
           return;
         }
         
-        // In this setup, any authenticated session is considered an admin session.
-        // The login page is the gatekeeper.
         setIsAdmin(true);
       }
 
@@ -29,7 +28,6 @@ export function withAdminAuth<P extends object>(WrappedComponent: ComponentType<
     }, [router]);
 
     if (isAdmin === null) {
-      // Loading state
       return (
         <div className="flex justify-center items-center min-h-screen">
           <p>Loading...</p>
@@ -38,7 +36,6 @@ export function withAdminAuth<P extends object>(WrappedComponent: ComponentType<
     }
     
     if (isAdmin === false) {
-      // This will be briefly visible before redirect
       return (
         <div className="flex justify-center items-center min-h-screen">
           <p>Redirecting...</p>
