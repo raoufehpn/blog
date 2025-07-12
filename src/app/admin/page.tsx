@@ -1,3 +1,4 @@
+'use client';
 
 import { withAdminAuth } from '@/components/auth/withAdminAuth';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
