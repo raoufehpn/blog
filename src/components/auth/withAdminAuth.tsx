@@ -16,8 +16,7 @@ export function withAdminAuth<P extends object>(WrappedComponent: ComponentType<
         const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL || "admin@example.com";
 
         if (error || !session || session.user.email !== adminEmail) {
-          router.push('/admin/login');
-          setIsAdmin(false);
+          router.push('/login');
           return;
         }
         
@@ -36,11 +35,7 @@ export function withAdminAuth<P extends object>(WrappedComponent: ComponentType<
     }
     
     if (isAdmin === false) {
-      return (
-        <div className="flex justify-center items-center min-h-screen">
-          <p>Redirecting...</p>
-        </div>
-      )
+       return null;
     }
 
     return <WrappedComponent {...props} />;
