@@ -10,7 +10,7 @@ import { useState } from 'react';
 const navLinks = [
   { href: '/posts', label: 'All Posts' },
   { href: '/about', label: 'About' },
-  { href: '#', label: 'Contact' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 const Logo = () => (
