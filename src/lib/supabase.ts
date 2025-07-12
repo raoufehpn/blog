@@ -96,70 +96,21 @@ function getImageUrl(imagePath: string): string {
   return `https://placehold.co/1200x630.png?text=${imagePath}`;
 }
 
-// Adapt functions are kept for future use when we fetch from Supabase
-function adaptPost(postData: any): Post {
-  return {
-    _id: postData.id,
-    _type: 'post',
-    title: postData.title,
-    slug: { _type: 'slug', current: postData.slug },
-    publishedAt: postData.published_at,
-    coverImage: {
-      _type: 'image',
-      asset: { _ref: postData.cover_image_url || '', _type: 'reference' },
-      url: getImageUrl(postData.cover_image_url)
-    },
-    excerpt: postData.excerpt,
-    content: postData.content || [],
-    author: adaptAuthor(postData.authors),
-    categories: postData.categories?.map(adaptCategory) || [],
-    tags: postData.tags || [],
-  };
-}
-
-function adaptAuthor(authorData: any): Author {
-  if (!authorData) {
-    return mockAuthor;
-  }
-  return {
-    _id: authorData.id,
-    _type: 'author',
-    name: authorData.name,
-    image: {
-        _type: 'image',
-        asset: { _ref: authorData.image_url || '', _type: 'reference'},
-        url: getImageUrl(authorData.image_url)
-    },
-    bio: authorData.bio || [],
-    socials: authorData.socials || [],
-  }
-}
-
-function adaptCategory(categoryData: any): Category {
-    return {
-        _id: categoryData.id,
-        _type: 'category',
-        title: categoryData.title,
-        description: categoryData.description,
-    }
-}
-
-
 export async function getPosts(): Promise<Post[]> {
-  // TODO: In the next step, we will fetch this from Supabase.
   // For now, we return mock data so the app is populated.
   return Promise.resolve(mockPosts);
 }
 
 export async function getPost(slug: string): Promise<Post | null> {
+  // For now, we return mock data so the app is populated.
   const post = mockPosts.find((p) => p.slug.current === slug);
   return Promise.resolve(post || null);
 }
 
 export async function getPostsByCategory(categoryTitle: string): Promise<Post[]> {
+  // For now, we return mock data so the app is populated.
   if (!categoryTitle) return Promise.resolve(mockPosts);
   
-  // TODO: Fetch from Supabase
   const posts = mockPosts.filter(p => 
     p.categories.some(c => c.title.toLowerCase() === categoryTitle.toLowerCase())
   );
@@ -167,7 +118,7 @@ export async function getPostsByCategory(categoryTitle: string): Promise<Post[]>
 }
 
 export async function getCategories(): Promise<Category[]> {
-    // TODO: Fetch from Supabase
+    // For now, we return mock data so the app is populated.
     return Promise.resolve(mockCategories);
 }
 
