@@ -8,9 +8,9 @@ const MOCK_AUTHORS: Author[] = [
   {
     _id: 'author-1',
     _type: 'author',
-    name: 'Jane Doe',
+    name: 'abde raoufe',
     image: { _type: 'image', asset: { _ref: 'image-person1', _type: 'reference' } },
-    bio: [{ _key: '1', _type: 'block', children: [{ _key: '1-1', _type: 'span', marks: [], text: 'A passionate developer exploring the depths of modern web technologies.' }], markDefs: [], style: 'normal' }],
+    bio: [{ _key: '1', _type: 'block', children: [{ _key: '1-1', _type: 'span', marks: [], text: 'abde raoufe is a full-stack developer with expertise in the MERN stack and Next.js. He is passionate about building modern, scalable web applications.' }], markDefs: [], style: 'normal' }],
     socials: [{ name: 'Twitter', url: '#' }, { name: 'GitHub', url: '#' }]
   },
 ];
