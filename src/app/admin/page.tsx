@@ -1,15 +1,16 @@
 'use client';
 
 import { withAdminAuth } from '@/components/auth/withAdminAuth';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { FilePenLine, Trash2 } from 'lucide-react';
+import { FilePenLine, Trash2, PlusCircle } from 'lucide-react';
 import { getPosts } from '@/lib/supabase';
 import type { Post } from '@/types';
 import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
+import Link from 'next/link';
 
 function AdminPage() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -27,13 +28,22 @@ function AdminPage() {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <header className="mb-8">
-        <h1 className="text-4xl font-bold font-headline tracking-tighter">Admin Dashboard</h1>
-        <p className="text-muted-foreground mt-1 text-lg">Manage your blog content.</p>
+      <header className="mb-8 flex items-center justify-between">
+        <div>
+            <h1 className="text-4xl font-bold font-headline tracking-tighter">Admin Dashboard</h1>
+            <p className="text-muted-foreground mt-1 text-lg">Manage your blog content.</p>
+        </div>
+        <Button asChild>
+          <Link href="/admin/new">
+            <PlusCircle className="mr-2 h-4 w-4" />
+            New Post
+          </Link>
+        </Button>
       </header>
       <Card>
         <CardHeader>
           <CardTitle>All Posts</CardTitle>
+           <CardDescription>A list of all the posts in your blog.</CardDescription>
         </CardHeader>
         <CardContent>
           {loading ? (
