@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/toaster';
@@ -12,19 +12,30 @@ const inter = Inter({
   variable: '--font-body',
 });
 
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-headline',
+});
+
 export const metadata: Metadata = {
   title: {
-    default: 'Sanity & Serenity',
-    template: '%s | Sanity & Serenity',
+    default: 'hpn blog',
+    template: '%s | hpn blog',
   },
   description: 'A professional, responsive, SEO-optimized personal blog using Next.js, TypeScript, Tailwind CSS, and Sanity.io.',
   openGraph: {
-    title: 'Sanity & Serenity',
+    title: 'hpn blog',
     description: 'A modern blog for the modern developer.',
     type: 'website',
     locale: 'en_US',
     url: 'https://your-domain.com', 
-    siteName: 'Sanity & Serenity',
+    siteName: 'hpn blog',
+  },
+   twitter: {
+    card: 'summary_large_image',
+    title: 'hpn blog',
+    description: 'A modern blog for the modern developer.',
   },
 };
 
@@ -35,7 +46,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn("min-h-screen bg-background font-body antialiased", inter.variable)}>
+      <body className={cn("min-h-screen bg-background font-body antialiased", inter.variable, spaceGrotesk.variable)}>
         <div className="relative flex min-h-dvh flex-col bg-background">
           <Header />
           <main className="flex-1">{children}</main>
