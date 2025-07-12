@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import type { Post } from '@/types';
 import { urlFor, dataAiHintMap } from '@/lib/sanity';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
 
 interface PostCardProps {
   post: Post;
@@ -16,26 +17,29 @@ export function PostCard({ post }: PostCardProps) {
   const authorImageHint = dataAiHintMap[post.author.image.asset._ref] || 'person';
 
   return (
-    <Link href={`/post/${post.slug.current}`} className="group flex flex-col">
-      <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg mb-4">
+    <Link 
+      href={`/post/${post.slug.current}`} 
+      className="group block overflow-hidden rounded-lg border bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+    >
+      <div className="relative aspect-[16/10] w-full overflow-hidden">
         <Image
           src={postImageUrl}
           alt={post.title}
           fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           data-ai-hint={dataAiHint}
         />
       </div>
-      <div className="flex flex-col flex-grow">
-        <p className="font-semibold text-primary mb-2 text-sm">
-          {post.categories[0]?.title || 'Blog'}
-        </p>
-        <h3 className="font-bold text-xl leading-snug mb-3">
-          <span className="text-balance group-hover:text-primary transition-colors">{post.title}</span>
+      <div className="p-5">
+        <Badge variant="outline" className="mb-3">
+            {post.categories[0]?.title || 'Blog'}
+        </Badge>
+        <h3 className="font-bold text-lg leading-snug mb-3 text-balance">
+          {post.title}
         </h3>
-        <p className="text-muted-foreground text-base line-clamp-3 mb-4 flex-grow">{post.excerpt}</p>
-        <div className="flex items-center gap-3 text-sm text-muted-foreground mt-auto">
+        <p className="text-muted-foreground text-sm line-clamp-2 mb-4">{post.excerpt}</p>
+        <div className="flex items-center gap-3 text-sm text-muted-foreground mt-auto pt-4 border-t">
           <Avatar className="h-8 w-8">
             <AvatarImage src={authorImageUrl} alt={post.author.name} data-ai-hint={authorImageHint}/>
             <AvatarFallback>{post.author.name.charAt(0)}</AvatarFallback>
