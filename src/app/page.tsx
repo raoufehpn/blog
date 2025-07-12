@@ -5,7 +5,7 @@ export default async function Home() {
   const posts = await getPosts();
 
   return (
-    <div className="container mx-auto px-4 py-8 md:py-16">
+    <div className="container mx-auto px-4 py-12 md:py-20">
       <ClientHomePage posts={posts} />
     </div>
   );

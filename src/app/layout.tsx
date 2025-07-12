@@ -1,21 +1,15 @@
 import type { Metadata } from 'next';
-import { Manrope, Urbanist } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/toaster';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 
-const manrope = Manrope({
+const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-body',
-});
-
-const urbanist = Urbanist({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-headline',
 });
 
 export const metadata: Metadata = {
@@ -40,8 +34,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="dark">
-      <body className={cn("min-h-screen bg-background font-body antialiased", manrope.variable, urbanist.variable)}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={cn("min-h-screen bg-background font-body antialiased", inter.variable)}>
         <div className="relative flex min-h-dvh flex-col bg-background">
           <Header />
           <main className="flex-1">{children}</main>

@@ -5,7 +5,7 @@ import { PostCard } from '@/components/blog/PostCard';
 import Image from 'next/image';
 import Link from 'next/link';
 import { urlFor, dataAiHintMap } from '@/lib/sanity';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface ClientHomePageProps {
@@ -16,7 +16,7 @@ export default function ClientHomePage({ posts }: ClientHomePageProps) {
   if (!posts || posts.length === 0) {
     return (
       <div className="text-center py-16">
-        <h2 className="text-2xl font-semibold font-headline">No Posts Found</h2>
+        <h2 className="text-2xl font-semibold">No Posts Found</h2>
       </div>
     );
   }
@@ -29,43 +29,38 @@ export default function ClientHomePage({ posts }: ClientHomePageProps) {
 
   return (
     <>
-       <header className="text-center mb-16">
-        <h1 className="text-4xl md:text-6xl font-bold font-headline tracking-tight text-balance">
-          Sanity & Serenity
-        </h1>
-        <p className="text-muted-foreground mt-4 text-lg max-w-2xl mx-auto">
-          A personal blog about modern web development, design, and everything in between.
-        </p>
-      </header>
-
-      <section className="mb-16">
+      <section className="mb-16 md:mb-24">
         <Link href={`/post/${featuredPost.slug.current}`} className="group block">
-          <div className="relative aspect-[16/9] md:aspect-[2/1] w-full rounded-2xl overflow-hidden shadow-lg">
-            <Image
-              src={featuredPostImageUrl}
-              alt={featuredPost.title}
-              fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1400px"
-              priority
-              data-ai-hint={featuredPostImageHint}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-            <div className="absolute bottom-0 left-0 p-6 md:p-10 text-white w-full md:w-3/4 lg:w-2/3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden">
+              <Image
+                src={featuredPostImageUrl}
+                alt={featuredPost.title}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+                data-ai-hint={featuredPostImageHint}
+              />
+            </div>
+            <div className="flex flex-col">
               <p className="font-semibold text-primary mb-2">Featured Post</p>
-              <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold font-headline text-primary-foreground text-balance leading-tight">
+              <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-balance leading-tight mb-4">
                 {featuredPost.title}
               </h1>
-              <p className="mt-2 md:mt-4 text-sm md:text-base text-primary-foreground/80 hidden md:block">
+              <p className="text-muted-foreground text-lg mb-6">
                 {featuredPost.excerpt}
               </p>
+              <div className="flex items-center gap-2 font-semibold text-primary">
+                Read post <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1"/>
+              </div>
             </div>
           </div>
         </Link>
       </section>
 
       <section>
-        <h2 className="text-3xl font-bold font-headline mb-8">Recent Posts</h2>
+        <h2 className="text-3xl font-bold mb-8">Recent blog posts</h2>
         {otherPosts.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
             {otherPosts.map((post) => (
@@ -78,6 +73,12 @@ export default function ClientHomePage({ posts }: ClientHomePageProps) {
           </div>
         )}
       </section>
+
+      <div className="text-center mt-16">
+        <Button variant="outline" size="lg">
+          Load more
+        </Button>
+      </div>
     </>
   );
 }

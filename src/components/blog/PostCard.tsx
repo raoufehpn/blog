@@ -18,8 +18,8 @@ export function PostCard({ post }: PostCardProps) {
   const authorImageHint = dataAiHintMap[post.author.image.asset._ref] || 'person';
 
   return (
-    <Link href={`/post/${post.slug.current}`} className="group flex flex-col bg-secondary/30 dark:bg-secondary/50 p-4 rounded-xl border border-transparent hover:border-primary/50 transition-all duration-300">
-      <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg mb-4">
+    <Link href={`/post/${post.slug.current}`} className="group flex flex-col">
+      <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg mb-4">
         <Image
           src={postImageUrl}
           alt={post.title}
@@ -30,15 +30,12 @@ export function PostCard({ post }: PostCardProps) {
         />
       </div>
       <div className="flex flex-col flex-grow">
-        <div className="flex items-center gap-2 mb-2">
-            {post.categories.slice(0, 1).map((category) => (
-                <Badge key={category._id} variant="default" className="bg-primary/10 text-primary hover:bg-primary/20 dark:bg-primary/20 dark:text-primary dark:hover:bg-primary/30">
-                    {category.title}
-                </Badge>
-            ))}
-        </div>
-        <h3 className="font-bold font-headline text-2xl leading-snug mb-3 text-balance group-hover:text-primary transition-colors">
-          {post.title}
+        <p className="font-semibold text-primary mb-2">
+          {post.categories[0]?.title || 'Blog'}
+        </p>
+        <h3 className="font-bold text-2xl leading-snug mb-3 flex items-start justify-between">
+          <span className="text-balance group-hover:text-primary transition-colors">{post.title}</span>
+          <ArrowUpRight className="h-6 w-6 text-foreground/70 flex-shrink-0 ml-2 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
         </h3>
         <p className="text-muted-foreground text-base line-clamp-3 mb-6 flex-grow">{post.excerpt}</p>
         <div className="flex items-center gap-3 text-sm text-muted-foreground mt-auto">
