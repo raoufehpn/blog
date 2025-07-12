@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -5,23 +6,38 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Github, Twitter } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
+import { urlFor } from '@/lib/supabase';
 
 export const metadata: Metadata = {
   title: 'About',
   description: 'Learn more about the author of this blog.',
 };
 
-const author = {
-    name: 'abde raoufe',
-    image: 'https://i.postimg.cc/FKMsD7S4/Karakuzular.jpg',
-    bio: 'A passionate full-stack developer specializing in the MERN stack and Next.js.',
-    socials: [
-        { name: 'Twitter', url: process.env.NEXT_PUBLIC_SOCIAL_TWITTER || '#' },
-        { name: 'GitHub', url: process.env.NEXT_PUBLIC_SOCIAL_GITHUB || '#' }
-    ],
-};
+async function getAuthor() {
+    const { data, error } = await supabase
+        .from('authors')
+        .select('*')
+        .limit(1)
+        .single();
+    
+    if (error || !data) {
+        console.error("Could not fetch author", error);
+        return null;
+    }
+    return data;
+}
 
-export default function AboutPage() {
+
+export default async function AboutPage() {
+    const author = await getAuthor();
+
+    if (!author) {
+        return <div className="container mx-auto px-4 py-8">Author not found.</div>
+    }
+    
+    const authorImageUrl = urlFor({ asset: { _ref: author.image_url, _type: 'reference' } });
+
     return (
         <div className="container mx-auto px-4 py-12">
             <header className="text-center mb-12">
@@ -34,20 +50,23 @@ export default function AboutPage() {
                     <div className="md:flex">
                         <div className="md:w-1/3 bg-secondary p-8 flex flex-col items-center justify-center">
                             <Avatar className="w-32 h-32 border-4 border-background shadow-lg mb-4">
-                                <AvatarImage src={author.image} alt={author.name} data-ai-hint="person face"/>
+                                <AvatarImage src={authorImageUrl} alt={author.name} data-ai-hint="person face"/>
                                 <AvatarFallback className="text-4xl">{author.name.charAt(0)}</AvatarFallback>
                             </Avatar>
                             <h2 className="text-2xl font-headline font-semibold mt-4">{author.name}</h2>
                             <div className="flex space-x-2 mt-4">
-                                {author.socials?.map((social) => (
-                                    <Button key={social.name} variant="ghost" size="icon" asChild>
-                                        <Link href={social.url} target="_blank" rel="noopener noreferrer">
-                                            {social.name.toLowerCase() === 'twitter' && <Twitter className="h-5 w-5" />}
-                                            {social.name.toLowerCase() === 'github' && <Github className="h-5 w-5" />}
-                                            <span className="sr-only">{social.name}</span>
-                                        </Link>
-                                    </Button>
-                                ))}
+                               <Button variant="ghost" size="icon" asChild>
+                                    <Link href={process.env.NEXT_PUBLIC_SOCIAL_TWITTER || '#'} target="_blank" rel="noopener noreferrer">
+                                        <Twitter className="h-5 w-5" />
+                                        <span className="sr-only">Twitter</span>
+                                    </Link>
+                                </Button>
+                                <Button variant="ghost" size="icon" asChild>
+                                    <Link href={process.env.NEXT_PUBLIC_SOCIAL_GITHUB || '#'} target="_blank" rel="noopener noreferrer">
+                                        <Github className="h-5 w-5" />
+                                        <span className="sr-only">GitHub</span>
+                                    </Link>
+                                </Button>
                             </div>
                         </div>
                         <div className="md:w-2/3 p-8">
