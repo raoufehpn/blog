@@ -42,21 +42,21 @@ export default function ClientHomePage({ posts }: ClientHomePageProps) {
               data-ai-hint={featuredPostImageHint}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
-            <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-12">
+            <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-6 md:p-12">
                 <div className="max-w-2xl text-white">
                     <p className="font-semibold text-sm mb-2">Featured</p>
-                    <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-balance leading-tight mb-4">
+                    <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight text-balance leading-tight mb-4">
                         {featuredPost.title}
                     </h1>
-                    <p className="text-white/80 text-lg hidden md:block mb-6">
+                    <p className="text-white/80 text-base md:text-lg hidden md:block mb-6">
                         {featuredPost.excerpt}
                     </p>
                     <div className="flex items-center gap-2 font-semibold text-white mt-4">
                         Read post <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1"/>
                     </div>
                 </div>
-                <div className="absolute top-6 right-6 md:top-12 md:right-12 text-white/80 transition-all group-hover:text-white group-hover:scale-110">
-                    <ArrowRight className="h-8 w-8" />
+                <div className="absolute top-4 right-4 md:top-12 md:right-12 text-white/80 transition-all group-hover:text-white group-hover:scale-110">
+                    <ArrowRight className="h-6 w-6 md:h-8 md:w-8" />
                 </div>
             </div>
           </div>
