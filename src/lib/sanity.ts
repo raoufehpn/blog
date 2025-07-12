@@ -91,6 +91,9 @@ export async function getPost(slug: string): Promise<Post | null> {
 }
 
 export async function getPostsByCategory(categoryTitle: string): Promise<Post[]> {
+    if (!categoryTitle) {
+      return Promise.resolve(MOCK_POSTS);
+    }
     const normalizedCategory = categoryTitle.toLowerCase();
     const posts = MOCK_POSTS.filter(p => 
         p.categories.some(c => c.title.toLowerCase() === normalizedCategory)
@@ -115,7 +118,7 @@ export function urlFor(source: SanityImage): string {
         'image-2': 'https://placehold.co/1200x630.png',
         'image-3': 'https://placehold.co/1200x630.png',
         'image-4': 'https://placehold.co/1200x630.png',
-        'image-person1': 'https://placehold.co/100x100.png',
+        'image-person1': 'https://i.postimg.cc/FKMsD7S4/Karakuzular.jpg',
     };
     const key = source?.asset?._ref;
     return imageMap[key] || 'https://placehold.co/1200x630.png';
@@ -126,5 +129,5 @@ export const dataAiHintMap: { [key: string]: string } = {
     'image-2': 'modern architecture',
     'image-3': 'minimalist design',
     'image-4': 'web development',
-    'image-person1': 'professional portrait',
+    'image-person1': 'profile picture',
 };
