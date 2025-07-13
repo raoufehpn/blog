@@ -1,3 +1,4 @@
+
 "use server";
 
 import { supabase } from "@/lib/supabase";
@@ -93,7 +94,7 @@ export async function createPost(formData: FormData) {
     style: 'normal',
   };
 
-  const { data: newPost, error } = await supabase
+  const { error } = await supabase
     .from('posts')
     .insert({
       title,
@@ -104,9 +105,7 @@ export async function createPost(formData: FormData) {
       tags,
       published_at: new Date().toISOString(),
       cover_image_url: `https://placehold.co/1200x630.png?text=${encodeURIComponent(title)}`,
-    })
-    .select('id')
-    .single();
+    });
 
   if (error) {
     console.error('Error creating post:', error);
