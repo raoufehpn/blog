@@ -24,7 +24,7 @@ export async function userLogin(formData: FormData) {
   if (email === adminEmail) {
     redirect('/admin');
   } else {
-    redirect('/');
+    redirect('/dashboard');
   }
 }
 
@@ -41,8 +41,8 @@ export async function userSignUp(formData: FormData) {
     redirect('/signup?error=' + encodeURIComponent(error.message));
   }
 
-  revalidatePath('/', 'layout');
-  redirect('/');
+  // Redirect to login page with a success message instead of home to avoid loops
+  redirect('/login?message=Account+created.+Please+log+in.');
 }
 
 
@@ -63,6 +63,12 @@ export async function createPost(formData: FormData) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) {
     return redirect('/login');
+  }
+  
+  const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL || "admin@example.com";
+  if (user.email !== adminEmail) {
+    console.error("Unauthorized attempt to create post by:", user.email);
+    return redirect('/?error=Unauthorized');
   }
 
   const { data: author } = await supabase

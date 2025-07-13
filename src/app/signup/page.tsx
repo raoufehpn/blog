@@ -1,3 +1,5 @@
+
+'use client';
 import {
   Card,
   CardContent,
@@ -5,13 +7,20 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { userSignUp } from "../auth/actions"
 import Link from "next/link"
+import { useSearchParams } from "next/navigation"
+import { Terminal } from "lucide-react"
+
 
 export default function SignUpPage() {
+  const searchParams = useSearchParams();
+  const error = searchParams.get('error');
+
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-15rem)]">
       <Card className="mx-auto max-w-sm">
@@ -22,6 +31,15 @@ export default function SignUpPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
+            {error && (
+              <Alert variant="destructive" className="mb-4">
+                <Terminal className="h-4 w-4" />
+                <AlertTitle>Sign-up Failed</AlertTitle>
+                <AlertDescription>
+                  {error}
+                </AlertDescription>
+              </Alert>
+            )}
           <form>
             <div className="grid gap-4">
               <div className="grid gap-2">
