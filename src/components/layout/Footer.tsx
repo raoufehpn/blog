@@ -4,19 +4,17 @@ const footerLinksGroups = [
     {
         title: 'Social',
         links: [
-            { name: 'Twitter', href: '#' },
-            { name: 'LinkedIn', href: '#' },
-            { name: 'Facebook', href: '#' },
-            { name: 'GitHub', href: '#' }
+            { name: 'X', href: 'https://x.com/GhoutThe1731?t=BS7axAQye6gCCugDZHsPtA&s=09' },
+            { name: 'LinkedIn', href: 'https://www.linkedin.com/in/raoufe-abde-b9b81636a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app' },
+            { name: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61577265774600' },
         ],
     },
     {
-        title: 'Legal',
+        title: 'Navigate',
         links: [
-            { name: 'Terms', href: '#' },
-            { name: 'Privacy', href: '#' },
-            { name: 'Cookies', href: '#' },
-            { name: 'Licenses', href: '#' }
+            { name: 'All Posts', href: '/posts' },
+            { name: 'About', href: '/about' },
+            { name: 'Contact', href: '/contact' },
         ],
     },
 ];
@@ -41,7 +39,7 @@ export function Footer() {
                 <ul className="space-y-3">
                   {links.map((link) => (
                     <li key={link.name}>
-                      <Link href={link.href} className="text-muted-foreground hover:text-foreground transition-colors">
+                      <Link href={link.href} className="text-muted-foreground hover:text-foreground transition-colors" target="_blank" rel="noopener noreferrer">
                         {link.name}
                       </Link>
                     </li>
@@ -51,12 +49,12 @@ export function Footer() {
             ))}
         </div>
         
-        <div className="border-t border-border/50 mt-16 pt-8 flex flex-col-reverse md:flex-row justify-between items-center text-sm text-muted-foreground gap-4">
+        <div className="border-t mt-16 pt-8 flex flex-col-reverse md:flex-row justify-between items-center text-sm text-muted-foreground gap-4">
             <p>&copy; {new Date().getFullYear()} Sanity & Serenity Blog. All rights reserved.</p>
              <div className="flex space-x-4">
-                <Link href="#" className="hover:text-foreground">Terms</Link>
-                <Link href="#" className="hover:text-foreground">Privacy</Link>
-                <Link href="#" className="hover:text-foreground">Cookies</Link>
+                <Link href="/posts" className="hover:text-foreground">All Posts</Link>
+                <Link href="/about" className="hover:text-foreground">About</Link>
+                <Link href="/contact" className="hover:text-foreground">Contact</Link>
             </div>
         </div>
       </div>
