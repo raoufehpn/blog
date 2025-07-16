@@ -72,7 +72,7 @@ export const mockPosts: Post[] = [
     title: 'The Beginner\'s Guide to Mindfulness and Meditation',
     slug: { _type: 'slug', current: 'beginners-guide-to-mindfulness' },
     publishedAt: '2024-05-18T14:00:00Z',
-    coverImage: { _type: 'image', asset: { _ref: 'https://placehold.co/1200x800.png', _type: 'reference' } },
+    coverImage: { _type: 'image', asset: { _ref: 'https://i.postimg.cc/RZc7hp1k/pexels-kelvin809-810775.jpg', _type: 'reference' } },
     excerpt: 'Feeling stressed or overwhelmed? This guide introduces the basic principles of mindfulness and provides simple meditation exercises to help you find calm.',
     content: [{ _key: 'c4', _type: 'block', style: 'normal', markDefs: [], children: [{_key: 's4', _type: 'span', marks: [], text: 'Mindfulness is the practice of being present. You don\'t need a special cushion or a silent retreat to start. Learn how to incorporate mindfulness into your daily life for a greater sense of peace.'}] }],
     author: mockAuthor,
