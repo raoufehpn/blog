@@ -46,7 +46,7 @@ export const mockPosts: Post[] = [
     title: '10 Simple Recipes for a Healthy and Delicious Week',
     slug: { _type: 'slug', current: '10-simple-healthy-recipes' },
     publishedAt: '2024-05-12T11:30:00Z',
-    coverImage: { _type: 'image', asset: { _ref: 'https://i.postimg.cc/0j7bS2bB/image.png', _type: 'reference' } },
+    coverImage: { _type: 'image', asset: { _ref: 'https://i.postimg.cc/8kKTv1PG/pexels-ella-olsson-572949-1640777.jpg', _type: 'reference' } },
     excerpt: 'Eating healthy doesn\'t have to be boring or time-consuming. Here are 10 easy-to-make recipes that are both nutritious and packed with flavor.',
     content: [{ _key: 'c2', _type: 'block', style: 'normal', markDefs: [], children: [{_key: 's2', _type: 'span', marks: [], text: 'From quick breakfasts to satisfying dinners, these recipes are designed for busy people who want to maintain a healthy lifestyle without spending hours in the kitchen.'}] }],
     author: mockAuthor,

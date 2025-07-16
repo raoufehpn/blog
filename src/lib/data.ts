@@ -43,7 +43,7 @@ export function urlFor(source: SanityImage): string {
 export const dataAiHintMap: { [key: string]: string } = {
   'https://i.postimg.cc/FKMsD7S4/Karakuzular.jpg': 'person face',
   'https://i.postimg.cc/Qdn7nLbZ/man-with-backpack-strolling-by-beach-fluffy-clouds.jpg': 'travel beach',
-  'https://i.postimg.cc/0j7bS2bB/image.png': 'healthy food',
+  'https://i.postimg.cc/8kKTv1PG/pexels-ella-olsson-572949-1640777.jpg': 'healthy food',
   'https://i.postimg.cc/5N8yY3tT/image.png': 'morning routine',
   'https://i.postimg.cc/d1BuH9pW/image.png': 'zen meditation',
   'https://i.postimg.cc/pL4DgZ4K/image.png': 'cozy livingroom',
