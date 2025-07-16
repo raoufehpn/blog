@@ -33,7 +33,7 @@ export const mockPosts: Post[] = [
     title: 'The Ultimate Guide to Packing for a Weekend Getaway',
     slug: { _type: 'slug', current: 'ultimate-guide-to-packing-for-weekend-getaway' },
     publishedAt: '2024-05-10T10:00:00Z',
-    coverImage: { _type: 'image', asset: { _ref: 'https://i.postimg.cc/8P9bC17m/image.png', _type: 'reference' } },
+    coverImage: { _type: 'image', asset: { _ref: 'https://i.postimg.cc/Qdn7nLbZ/man-with-backpack-strolling-by-beach-fluffy-clouds.jpg', _type: 'reference' } },
     excerpt: 'Learn how to pack light and smart for your next weekend trip. This guide covers everything from choosing the right bag to essential items you can\'t forget.',
     content: [{ _key: 'c1', _type: 'block', style: 'normal', markDefs: [], children: [{_key: 's1', _type: 'span', marks: [], text: 'Packing for a short trip can be deceptively tricky. Our guide breaks down the process into simple, actionable steps to ensure you have everything you need without overpacking.'}] }],
     author: mockAuthor,

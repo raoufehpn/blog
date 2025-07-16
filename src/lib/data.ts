@@ -42,10 +42,10 @@ export function urlFor(source: SanityImage): string {
 // This map helps connect mock image refs to AI hints for better placeholder generation.
 export const dataAiHintMap: { [key: string]: string } = {
   'https://i.postimg.cc/FKMsD7S4/Karakuzular.jpg': 'person face',
-  'https://i.postimg.cc/8P9bC17m/image.png': 'abstract code',
-  'https://i.postimg.cc/0j7bS2bB/image.png': 'minimalist architecture',
-  'https://i.postimg.cc/5N8yY3tT/image.png': 'server racks',
-  'https://i.postimg.cc/d1BuH9pW/image.png': 'ux design wireframe',
-  'https://i.postimg.cc/pL4DgZ4K/image.png': 'ai robot',
-  'https://i.postimg.cc/Xv3w0ZJb/image.png': 'cybersecurity lock',
+  'https://i.postimg.cc/Qdn7nLbZ/man-with-backpack-strolling-by-beach-fluffy-clouds.jpg': 'travel beach',
+  'https://i.postimg.cc/0j7bS2bB/image.png': 'healthy food',
+  'https://i.postimg.cc/5N8yY3tT/image.png': 'morning routine',
+  'https://i.postimg.cc/d1BuH9pW/image.png': 'zen meditation',
+  'https://i.postimg.cc/pL4DgZ4K/image.png': 'cozy livingroom',
+  'https://i.postimg.cc/Xv3w0ZJb/image.png': 'vegetable garden',
 };
