@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { Github } from 'lucide-react';
+import { Linkedin } from 'lucide-react';
 import { getAuthor, urlFor } from '@/lib/data';
 
 export const metadata: Metadata = {
@@ -53,9 +53,9 @@ export default async function AboutPage() {
                                     </Link>
                                 </Button>
                                 <Button variant="ghost" size="icon" asChild>
-                                    <Link href={author.socials.find(s => s.name === 'GitHub')?.url || '#'} target="_blank" rel="noopener noreferrer">
-                                        <Github className="h-5 w-5" />
-                                        <span className="sr-only">GitHub</span>
+                                    <Link href={author.socials.find(s => s.name === 'LinkedIn')?.url || '#'} target="_blank" rel="noopener noreferrer">
+                                        <Linkedin className="h-5 w-5" />
+                                        <span className="sr-only">LinkedIn</span>
                                     </Link>
                                 </Button>
                             </div>

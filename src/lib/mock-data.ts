@@ -15,7 +15,7 @@ export const mockAuthor: Author = {
   }],
   socials: [
       {name: 'X', url: 'https://x.com/GhoutThe1731?t=BS7axAQye6gCCugDZHsPtA&s=09'},
-      {name: 'GitHub', url: '#'}
+      {name: 'LinkedIn', url: 'https://www.linkedin.com/in/raoufe-abde-b9b81636a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'}
   ]
 };
 
