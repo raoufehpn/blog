@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: post.excerpt,
       type: 'article',
       publishedTime: post.publishedAt,
-      url: `https://your-domain.com/post/${post.slug.current}`,
+      url: `/post/${post.slug.current}`,
       images: [
         {
           url: imageUrl,

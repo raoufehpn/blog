@@ -21,18 +21,12 @@ export default function ContactPage() {
         <div className="bg-secondary p-8 rounded-lg">
           <h2 className="text-2xl font-bold font-headline mb-4">Get in Touch</h2>
           <p className="text-muted-foreground mb-6">
-            I'm happy to hear from you. Whether you have a project in mind, a question about my work, or just want to say hello, feel free to reach out.
+            I'm happy to hear from you. Whether you have a project in mind, a question about my work, or just want to say hello, feel free to reach out using the form.
           </p>
           <div className="space-y-4">
             <div className="flex items-center gap-4">
               <Mail className="h-5 w-5 text-primary" />
-              <a href="mailto:contact@example.com" className="hover:text-primary transition-colors">
-                contact@example.com
-              </a>
-            </div>
-            <div className="flex items-center gap-4">
-              <Phone className="h-5 w-5 text-primary" />
-              <span className="text-muted-foreground">+1 (555) 123-4567</span>
+              <span>Use the contact form to reach me.</span>
             </div>
           </div>
         </div>

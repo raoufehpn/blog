@@ -24,19 +24,19 @@ export const metadata: Metadata = {
     default: 'Sanity & Serenity Blog',
     template: '%s | Sanity & Serenity Blog',
   },
-  description: 'A professional, responsive, SEO-optimized personal blog using Next.js, TypeScript, and Tailwind CSS.',
+  description: 'A blog about travel, food, and finding balance in a busy world. Discover new recipes, travel guides, and tips for a more mindful life.',
   openGraph: {
     title: 'Sanity & Serenity Blog',
-    description: 'A modern blog for the modern developer.',
+    description: 'A blog about travel, food, and finding balance in a busy world.',
     type: 'website',
     locale: 'en_US',
-    url: 'https://your-domain.com', 
+    url: '/', 
     siteName: 'Sanity & Serenity Blog',
   },
    twitter: {
     card: 'summary_large_image',
     title: 'Sanity & Serenity Blog',
-    description: 'A modern blog for the modern developer.',
+    description: 'A blog about travel, food, and finding balance in a busy world.',
   },
 };
 
