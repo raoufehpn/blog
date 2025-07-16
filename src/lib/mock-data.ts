@@ -85,7 +85,7 @@ export const mockPosts: Post[] = [
     title: 'How to Create a Cozy and Stylish Living Room on a Budget',
     slug: { _type: 'slug', current: 'cozy-living-room-on-a-budget' },
     publishedAt: '2024-05-20T16:00:00Z',
-    coverImage: { _type: 'image', asset: { _ref: 'https://placehold.co/1200x800.png', _type: 'reference' } },
+    coverImage: { _type: 'image', asset: { _ref: 'https://i.postimg.cc/g0ggscSy/spacejoy-Kh4ted-Fd-Hz4-unsplash.jpg', _type: 'reference' } },
     excerpt: 'You don\'t need to spend a fortune to have a living room you love. Discover our top tips for budget-friendly decor that makes a big impact.',
     content: [{ _key: 'c5', _type: 'block', style: 'normal', markDefs: [], children: [{_key: 's5', _type: 'span', marks: [], text: 'With a few clever tricks, you can transform your living space. From smart furniture choices to DIY decor, we show you how to create a stylish and inviting atmosphere without breaking the bank.'}] }],
     author: mockAuthor,

@@ -44,8 +44,8 @@ export const dataAiHintMap: { [key: string]: string } = {
   'https://i.postimg.cc/FKMsD7S4/Karakuzular.jpg': 'person face',
   'https://i.postimg.cc/Qdn7nLbZ/man-with-backpack-strolling-by-beach-fluffy-clouds.jpg': 'travel beach',
   'https://i.postimg.cc/8kKTv1PG/pexels-ella-olsson-572949-1640777.jpg': 'healthy food',
-  'https://i.postimg.cc/5N8yY3tT/image.png': 'morning routine',
-  'https://i.postimg.cc/d1BuH9pW/image.png': 'zen meditation',
-  'https://i.postimg.cc/pL4DgZ4K/image.png': 'cozy livingroom',
+  'https://i.postimg.cc/hvjs7849/pexels-arina-krasnikova-5951553.jpg': 'morning routine',
+  'https://i.postimg.cc/RZc7hp1k/pexels-kelvin809-810775.jpg': 'zen meditation',
+  'https://i.postimg.cc/g0ggscSy/spacejoy-Kh4ted-Fd-Hz4-unsplash.jpg': 'cozy livingroom',
   'https://i.postimg.cc/Xv3w0ZJb/image.png': 'vegetable garden',
 };
