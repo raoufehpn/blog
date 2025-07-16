@@ -5,7 +5,7 @@ export const mockAuthor: Author = {
   _id: 'author-1',
   _type: 'author',
   name: 'HPN',
-  image: { _type: 'image', asset: { _ref: 'https://i.postimg.cc/9Q6z3d7q/male-avatar-profile-picture-black-hair-vector-illustration-1142-84333.jpg', _type: 'reference' } },
+  image: { _type: 'image', asset: { _ref: 'https://i.postimg.cc/FKMsD7S4/Karakuzular.jpg', _type: 'reference' } },
   bio: [{ 
     _key: 'bio-1', 
     _type: 'block', 
