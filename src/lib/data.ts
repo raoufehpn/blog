@@ -47,5 +47,5 @@ export const dataAiHintMap: { [key: string]: string } = {
   'https://i.postimg.cc/hvjs7849/pexels-arina-krasnikova-5951553.jpg': 'morning routine',
   'https://i.postimg.cc/RZc7hp1k/pexels-kelvin809-810775.jpg': 'zen meditation',
   'https://i.postimg.cc/g0ggscSy/spacejoy-Kh4ted-Fd-Hz4-unsplash.jpg': 'cozy livingroom',
-  'https://i.postimg.cc/Xv3w0ZJb/image.png': 'vegetable garden',
+  'https://i.postimg.cc/sXZ5W3tg/pexels-mykeh-18943896.jpg': 'vegetable garden',
 };

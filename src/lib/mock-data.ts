@@ -98,7 +98,7 @@ export const mockPosts: Post[] = [
     title: 'A Step-by-Step Guide to Starting Your First Vegetable Garden',
     slug: { _type: 'slug', current: 'starting-your-first-vegetable-garden' },
     publishedAt: '2024-05-22T11:00:00Z',
-    coverImage: { _type: 'image', asset: { _ref: 'https://i.postimg.cc/Xv3w0ZJb/image.png', _type: 'reference' } },
+    coverImage: { _type: 'image', asset: { _ref: 'https://i.postimg.cc/sXZ5W3tg/pexels-mykeh-18943896.jpg', _type: 'reference' } },
     excerpt: 'Growing your own food is a rewarding experience. This guide provides everything you need to know, from choosing the right spot to harvesting your first crop.',
     content: [{ _key: 'c6', _type: 'block', style: 'normal', markDefs: [], children: [{_key: 's6', _type: 'span', marks: [], text: 'Whether you have a large backyard or a small balcony, you can enjoy fresh, homegrown vegetables. We walk you through the entire process, making it easy for anyone to get started.'}] }],
     author: mockAuthor,
