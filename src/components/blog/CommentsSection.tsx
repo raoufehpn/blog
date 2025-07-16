@@ -11,7 +11,7 @@ const mockComments = [
         id: 1,
         author: {
             name: 'Jane Doe',
-            avatarUrl: 'https://placehold.co/100x100.png',
+            avatarUrl: 'https://i.postimg.cc/FKMsD7S4/Karakuzular.jpg',
             initials: 'JD'
         },
         timestamp: '2 hours ago',
@@ -21,7 +21,7 @@ const mockComments = [
         id: 2,
         author: {
             name: 'John Smith',
-            avatarUrl: 'https://placehold.co/100x100.png',
+            avatarUrl: 'https://i.postimg.cc/FKMsD7S4/Karakuzular.jpg',
             initials: 'JS'
         },
         timestamp: '5 hours ago',
@@ -38,7 +38,7 @@ export function CommentsSection() {
                 <CardContent className="p-6">
                     <div className="flex items-start gap-4">
                         <Avatar>
-                            <AvatarImage src="https://placehold.co/100x100.png" alt="Your Avatar" data-ai-hint="person"/>
+                            <AvatarImage src="https://i.postimg.cc/FKMsD7S4/Karakuzular.jpg" alt="Your Avatar" data-ai-hint="person"/>
                             <AvatarFallback>U</AvatarFallback>
                         </Avatar>
                         <div className="w-full">
