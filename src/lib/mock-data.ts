@@ -48,7 +48,7 @@ export const mockPosts: Post[] = [
     publishedAt: '2024-05-12T11:30:00Z',
     coverImage: { _type: 'image', asset: { _ref: 'https://i.postimg.cc/0j7bS2bB/image.png', _type: 'reference' } },
     excerpt: 'Discover the principles of minimalist design and how "less is more" can lead to more intuitive and impactful user experiences.',
-    content: [{ _key: 'c2', _type: 'block', style: 'normal', markDefs: [], children: [{_key: 's2', _type: 'span', marks: [], text: 'Minimalism is not just an aesthetic; it\'s a philosophy. It helps users focus on what truly matters in your application by removing unnecessary clutter and embracing whitespace.'}] }],
+    content: [{ _key: 'c2', _type: 'block', style: 'normal', markDefs: [], children: [{_key: 's2', _type: 'span', marks: [], text: "Minimalism is not just an aesthetic; it's a philosophy. It helps users focus on what truly matters in your application by removing unnecessary clutter and embracing whitespace."}] }],
     author: mockAuthor,
     categories: [mockCategories[1]],
     tags: ['UI/UX', 'Design', 'Minimalism'],
