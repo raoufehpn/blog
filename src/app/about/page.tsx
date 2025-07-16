@@ -5,13 +5,20 @@ import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { Github, Twitter } from 'lucide-react';
+import { Github } from 'lucide-react';
 import { getAuthor, urlFor } from '@/lib/data';
 
 export const metadata: Metadata = {
   title: 'About',
   description: 'Learn more about the author of this blog.',
 };
+
+const XLogo = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
+        <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153Zm-1.61 19.933h2.51l-13.9-19.933H3.78l13.511 19.933Z"/>
+    </svg>
+);
+
 
 export default async function AboutPage() {
     const author = await getAuthor();
@@ -40,9 +47,9 @@ export default async function AboutPage() {
                             <h2 className="text-2xl font-headline font-semibold mt-4">{author.name}</h2>
                             <div className="flex space-x-2 mt-4">
                                <Button variant="ghost" size="icon" asChild>
-                                    <Link href={author.socials.find(s => s.name === 'Twitter')?.url || '#'} target="_blank" rel="noopener noreferrer">
-                                        <Twitter className="h-5 w-5" />
-                                        <span className="sr-only">Twitter</span>
+                                    <Link href={author.socials.find(s => s.name === 'X')?.url || '#'} target="_blank" rel="noopener noreferrer">
+                                        <XLogo className="h-5 w-5" />
+                                        <span className="sr-only">X</span>
                                     </Link>
                                 </Button>
                                 <Button variant="ghost" size="icon" asChild>

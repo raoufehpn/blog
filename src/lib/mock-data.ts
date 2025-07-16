@@ -14,7 +14,7 @@ export const mockAuthor: Author = {
     children: [{_key: 'span-1', _type: 'span', marks: [], text: 'An experienced developer navigating the worlds of AI, web development, and everything in between. Passionate about creating beautiful and functional applications.'}]
   }],
   socials: [
-      {name: 'Twitter', url: '#'},
+      {name: 'X', url: 'https://x.com/GhoutThe1731?t=BS7axAQye6gCCugDZHsPtA&s=09'},
       {name: 'GitHub', url: '#'}
   ]
 };
