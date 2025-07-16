@@ -1,4 +1,4 @@
-import { getPostsByCategory, getCategories } from '@/lib/supabase';
+import { getPostsByCategory, getCategories } from '@/lib/data';
 import type { Metadata } from 'next';
 import { PostCard } from '@/components/blog/PostCard';
 import { notFound } from 'next/navigation';
@@ -17,8 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CategoryPage({ params }: Props) {
   const categoryTitle = decodeURIComponent(params.category).replace(/-/g, ' ');
-  // "all" is a special case, so we won't try to fetch posts for a category named "all".
-  const posts = params.category === 'all' ? await getPostsByCategory('') : await getPostsByCategory(categoryTitle);
+  const posts = await getPostsByCategory(categoryTitle);
   const categories = await getCategories();
   
   const categoryExists = categories.some(c => c.title.toLowerCase() === categoryTitle.toLowerCase());

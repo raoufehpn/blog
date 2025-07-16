@@ -6,28 +6,12 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Github, Twitter } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
-import { urlFor } from '@/lib/supabase';
+import { getAuthor, urlFor } from '@/lib/data';
 
 export const metadata: Metadata = {
   title: 'About',
   description: 'Learn more about the author of this blog.',
 };
-
-async function getAuthor() {
-    const { data, error } = await supabase
-        .from('authors')
-        .select('*')
-        .limit(1)
-        .single();
-    
-    if (error || !data) {
-        console.error("Could not fetch author", error);
-        return null;
-    }
-    return data;
-}
-
 
 export default async function AboutPage() {
     const author = await getAuthor();
@@ -36,7 +20,7 @@ export default async function AboutPage() {
         return <div className="container mx-auto px-4 py-8">Author not found.</div>
     }
     
-    const authorImageUrl = urlFor({ asset: { _ref: author.image_url, _type: 'reference' } });
+    const authorImageUrl = urlFor(author.image);
 
     return (
         <div className="container mx-auto px-4 py-12">
@@ -56,13 +40,13 @@ export default async function AboutPage() {
                             <h2 className="text-2xl font-headline font-semibold mt-4">{author.name}</h2>
                             <div className="flex space-x-2 mt-4">
                                <Button variant="ghost" size="icon" asChild>
-                                    <Link href={process.env.NEXT_PUBLIC_SOCIAL_TWITTER || '#'} target="_blank" rel="noopener noreferrer">
+                                    <Link href={author.socials.find(s => s.name === 'Twitter')?.url || '#'} target="_blank" rel="noopener noreferrer">
                                         <Twitter className="h-5 w-5" />
                                         <span className="sr-only">Twitter</span>
                                     </Link>
                                 </Button>
                                 <Button variant="ghost" size="icon" asChild>
-                                    <Link href={process.env.NEXT_PUBLIC_SOCIAL_GITHUB || '#'} target="_blank" rel="noopener noreferrer">
+                                    <Link href={author.socials.find(s => s.name === 'GitHub')?.url || '#'} target="_blank" rel="noopener noreferrer">
                                         <Github className="h-5 w-5" />
                                         <span className="sr-only">GitHub</span>
                                     </Link>
@@ -75,7 +59,7 @@ export default async function AboutPage() {
                             </CardHeader>
                             <CardContent>
                                 <div className="prose dark:prose-invert max-w-none font-body text-muted-foreground">
-                                    <p>{author.bio}</p>
+                                    <p>{author.bio[0]?.children[0]?.text || ''}</p>
                                 </div>
                             </CardContent>
                         </div>

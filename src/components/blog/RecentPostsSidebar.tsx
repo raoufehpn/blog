@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { format } from 'date-fns';
 import type { Post } from '@/types';
-import { urlFor, dataAiHintMap } from '@/lib/supabase';
+import { urlFor, dataAiHintMap } from '@/lib/data';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '../ui/button';
 

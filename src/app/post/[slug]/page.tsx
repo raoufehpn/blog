@@ -1,9 +1,9 @@
-import { getPost, getPosts } from '@/lib/supabase';
+import { getPost, getPosts } from '@/lib/data';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { format } from 'date-fns';
-import { urlFor, dataAiHintMap } from '@/lib/supabase';
+import { urlFor, dataAiHintMap } from '@/lib/data';
 import { PortableText } from '@/components/blog/PortableText';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: post.excerpt,
       type: 'article',
       publishedTime: post.publishedAt,
-      url: `https://your-domain.com/post/${post.slug.current}`, // Replace with your domain
+      url: `https://your-domain.com/post/${post.slug.current}`,
       images: [
         {
           url: imageUrl,

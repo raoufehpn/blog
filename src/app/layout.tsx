@@ -6,8 +6,6 @@ import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/toaster';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
-import { supabase } from '@/lib/supabase';
-import { AuthProvider } from '@/hooks/useAuth';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -26,7 +24,7 @@ export const metadata: Metadata = {
     default: 'hpn blog',
     template: '%s | hpn blog',
   },
-  description: 'A professional, responsive, SEO-optimized personal blog using Next.js, TypeScript, Tailwind CSS, and Supabase.',
+  description: 'A professional, responsive, SEO-optimized personal blog using Next.js, TypeScript, and Tailwind CSS.',
   openGraph: {
     title: 'hpn blog',
     description: 'A modern blog for the modern developer.',
@@ -42,24 +40,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { data: { session }} = await supabase.auth.getSession();
-
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn("min-h-screen bg-background font-body antialiased", inter.variable, spaceGrotesk.variable)}>
-        <AuthProvider>
           <div className="relative flex min-h-dvh flex-col bg-background">
-            <Header session={session}/>
+            <Header />
             <main className="flex-1">{children}</main>
             <Footer />
           </div>
           <Toaster />
-        </AuthProvider>
       </body>
     </html>
   );

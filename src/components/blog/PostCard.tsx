@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { format } from 'date-fns';
 import type { Post } from '@/types';
-import { urlFor, dataAiHintMap } from '@/lib/supabase';
+import { urlFor, dataAiHintMap } from '@/lib/data';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 

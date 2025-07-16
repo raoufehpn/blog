@@ -2,21 +2,11 @@
 "use client";
 
 import Link from 'next/link';
-import { Menu, UserCircle, LogOut, LayoutDashboard } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import { useState, useEffect } from 'react';
-import type { Session } from '@supabase/supabase-js';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { logout } from '@/app/auth/actions';
+import { useState } from 'react';
 
 const navLinks = [
   { href: '/posts', label: 'All Posts' },
@@ -32,25 +22,9 @@ const Logo = () => (
 );
 
 
-export function Header({ session }: { session: Session | null }) {
+export function Header() {
   const [isSheetOpen, setSheetOpen] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
   
-  useEffect(() => {
-    const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL || "admin@example.com";
-    if(session?.user?.email === adminEmail) {
-        setIsAdmin(true);
-    } else {
-        setIsAdmin(false);
-    }
-  }, [session]);
-
-  const handleLogout = async () => {
-    await logout();
-  }
-  
-  const allNavLinks = isAdmin ? [...navLinks, { href: '/admin', label: 'Admin' }] : navLinks;
-
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center">
@@ -72,7 +46,7 @@ export function Header({ session }: { session: Session | null }) {
                 <Logo />
               </Link>
               <div className="flex flex-col space-y-3">
-                {allNavLinks.map((link) => (
+                {navLinks.map((link) => (
                   <Link 
                     key={link.label} 
                     href={link.href} 
@@ -82,25 +56,6 @@ export function Header({ session }: { session: Session | null }) {
                     {link.label}
                   </Link>
                 ))}
-                 {session && !isAdmin && (
-                    <Link href="/dashboard" className="transition-colors hover:text-foreground text-foreground/80 text-lg py-2" onClick={() => setSheetOpen(false)}>
-                        Dashboard
-                    </Link>
-                 )}
-              </div>
-               <div className="mt-6 pt-6 border-t flex flex-col gap-2">
-                  {session ? (
-                     <Button onClick={handleLogout} variant="ghost" className="w-full justify-center text-lg">Sign Out</Button>
-                  ) : (
-                    <>
-                        <Button asChild variant="default" className="w-full justify-center text-lg">
-                            <Link href="/login" onClick={() => setSheetOpen(false)}>Login</Link>
-                        </Button>
-                        <Button asChild variant="outline" className="w-full justify-center text-lg">
-                            <Link href="/signup" onClick={() => setSheetOpen(false)}>Sign Up</Link>
-                        </Button>
-                    </>
-                  )}
               </div>
             </SheetContent>
           </Sheet>
@@ -108,7 +63,7 @@ export function Header({ session }: { session: Session | null }) {
 
         <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex">
             <nav className="flex items-center gap-6 text-sm">
-                {allNavLinks.map((link) => (
+                {navLinks.map((link) => (
                 <Link
                     key={link.label}
                     href={link.href}
@@ -121,47 +76,6 @@ export function Header({ session }: { session: Session | null }) {
         </div>
 
         <div className="hidden md:flex items-center justify-end gap-2 ml-auto">
-            {session ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                     <UserCircle className="h-8 w-8" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56" align="end" forceMount>
-                  <DropdownMenuLabel className="font-normal">
-                    <div className="flex flex-col space-y-1">
-                      <p className="text-sm font-medium leading-none">{isAdmin ? "Admin Account" : "User Account"}</p>
-                       {session.user.email && <p className="text-xs leading-none text-muted-foreground">
-                        {session.user.email}
-                      </p>}
-                    </div>
-                  </DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  {!isAdmin && (
-                    <DropdownMenuItem asChild className="cursor-pointer">
-                      <Link href="/dashboard">
-                        <LayoutDashboard className="mr-2 h-4 w-4" />
-                        <span>Dashboard</span>
-                      </Link>
-                    </DropdownMenuItem>
-                  )}
-                  <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
-                    <LogOut className="mr-2 h-4 w-4" />
-                    <span>Log out</span>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : (
-                <div className="flex items-center gap-2">
-                    <Button asChild variant="ghost" size="sm">
-                        <Link href="/login">Login</Link>
-                    </Button>
-                    <Button asChild size="sm">
-                        <Link href="/signup">Sign Up</Link>
-                    </Button>
-                </div>
-            )}
             <ThemeToggle />
         </div>
       </div>

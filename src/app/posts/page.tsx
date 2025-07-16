@@ -1,4 +1,5 @@
-import { getPosts } from "@/lib/supabase";
+
+import { getPosts } from "@/lib/data";
 import ClientPostsPage from "./client-posts-page";
 
 export default async function PostsPage() {
