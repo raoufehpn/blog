@@ -1,3 +1,4 @@
+
 import { getPost, getPosts } from '@/lib/data';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
@@ -74,7 +75,7 @@ export default async function PostPage({ params }: Props) {
                     <div className="flex items-center gap-2">
                         <Avatar className="h-8 w-8">
                         <AvatarImage src={authorImageUrl} alt={post.author.name} data-ai-hint={authorImageHint}/>
-                        <AvatarFallback>{post.author.name.charAt(0)}</AvatarFallback>
+                        <AvatarFallback>{post.author.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                         </Avatar>
                         <span>{post.author.name}</span>
                     </div>

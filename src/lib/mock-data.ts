@@ -4,7 +4,7 @@ import type { Post, Author, Category } from '@/types';
 export const mockAuthor: Author = {
   _id: 'author-1',
   _type: 'author',
-  name: 'HPN',
+  name: 'abde raoufe',
   image: { _type: 'image', asset: { _ref: 'https://i.postimg.cc/FKMsD7S4/Karakuzular.jpg', _type: 'reference' } },
   bio: [{ 
     _key: 'bio-1', 
@@ -15,7 +15,8 @@ export const mockAuthor: Author = {
   }],
   socials: [
       {name: 'X', url: 'https://x.com/GhoutThe1731?t=BS7axAQye6gCCugDZHsPtA&s=09'},
-      {name: 'LinkedIn', url: 'https://www.linkedin.com/in/raoufe-abde-b9b81636a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'}
+      {name: 'LinkedIn', url: 'https://www.linkedin.com/in/raoufe-abde-b9b81636a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'},
+      {name: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61577265774600'}
   ]
 };
 

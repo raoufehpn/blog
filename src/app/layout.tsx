@@ -21,21 +21,21 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: {
-    default: 'hpn blog',
-    template: '%s | hpn blog',
+    default: 'Sanity & Serenity Blog',
+    template: '%s | Sanity & Serenity Blog',
   },
   description: 'A professional, responsive, SEO-optimized personal blog using Next.js, TypeScript, and Tailwind CSS.',
   openGraph: {
-    title: 'hpn blog',
+    title: 'Sanity & Serenity Blog',
     description: 'A modern blog for the modern developer.',
     type: 'website',
     locale: 'en_US',
     url: 'https://your-domain.com', 
-    siteName: 'hpn blog',
+    siteName: 'Sanity & Serenity Blog',
   },
    twitter: {
     card: 'summary_large_image',
-    title: 'hpn blog',
+    title: 'Sanity & Serenity Blog',
     description: 'A modern blog for the modern developer.',
   },
 };

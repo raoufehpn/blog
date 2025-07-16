@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { Linkedin } from 'lucide-react';
+import { Linkedin, Facebook } from 'lucide-react';
 import { getAuthor, urlFor } from '@/lib/data';
 
 export const metadata: Metadata = {
@@ -42,7 +42,7 @@ export default async function AboutPage() {
                         <div className="md:w-1/3 bg-secondary p-8 flex flex-col items-center justify-center">
                             <Avatar className="w-32 h-32 border-4 border-background shadow-lg mb-4">
                                 <AvatarImage src={authorImageUrl} alt={author.name} data-ai-hint="person face"/>
-                                <AvatarFallback className="text-4xl">{author.name.charAt(0)}</AvatarFallback>
+                                <AvatarFallback className="text-4xl">{author.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                             </Avatar>
                             <h2 className="text-2xl font-headline font-semibold mt-4">{author.name}</h2>
                             <div className="flex space-x-2 mt-4">
@@ -56,6 +56,12 @@ export default async function AboutPage() {
                                     <Link href={author.socials.find(s => s.name === 'LinkedIn')?.url || '#'} target="_blank" rel="noopener noreferrer">
                                         <Linkedin className="h-5 w-5" />
                                         <span className="sr-only">LinkedIn</span>
+                                    </Link>
+                                </Button>
+                                <Button variant="ghost" size="icon" asChild>
+                                    <Link href={author.socials.find(s => s.name === 'Facebook')?.url || '#'} target="_blank" rel="noopener noreferrer">
+                                        <Facebook className="h-5 w-5" />
+                                        <span className="sr-only">Facebook</span>
                                     </Link>
                                 </Button>
                             </div>

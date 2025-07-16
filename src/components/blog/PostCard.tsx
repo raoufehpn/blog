@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { format } from 'date-fns';
@@ -42,7 +43,7 @@ export function PostCard({ post }: PostCardProps) {
         <div className="flex items-center gap-3 text-sm text-muted-foreground mt-auto pt-4 border-t">
           <Avatar className="h-8 w-8">
             <AvatarImage src={authorImageUrl} alt={post.author.name} data-ai-hint={authorImageHint}/>
-            <AvatarFallback>{post.author.name.charAt(0)}</AvatarFallback>
+            <AvatarFallback>{post.author.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
           </Avatar>
           <div>
             <p className="font-semibold text-foreground">{post.author.name}</p>
