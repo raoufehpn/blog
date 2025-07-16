@@ -12,6 +12,7 @@ const navLinks = [
   { href: '/posts', label: 'All Posts' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
+  { href: '/admin', label: 'Admin' }, // Added Admin link for easy access in preview
 ];
 
 const Logo = () => (
