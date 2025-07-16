@@ -9,6 +9,9 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { AIAssistant } from '@/components/blog/AIAssistant';
 import { RecentPostsSidebar } from '@/components/blog/RecentPostsSidebar';
+import { Separator } from '@/components/ui/separator';
+import { ActionToolbar } from '@/components/blog/ActionToolbar';
+import { CommentsSection } from '@/components/blog/CommentsSection';
 
 type Props = {
   params: { slug: string };
@@ -106,6 +109,13 @@ export default async function PostPage({ params }: Props) {
                 <div className="prose prose-lg dark:prose-invert max-w-none mx-auto font-body">
                     <PortableText value={post.content} />
                 </div>
+
+                <Separator className="my-12" />
+
+                <ActionToolbar />
+
+                <CommentsSection />
+
             </article>
 
             <aside className="lg:col-span-1 mt-12 lg:mt-0">
