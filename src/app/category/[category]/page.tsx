@@ -3,11 +3,13 @@ import type { Metadata } from 'next';
 import { PostCard } from '@/components/blog/PostCard';
 import { notFound } from 'next/navigation';
 
-type Props = {
-  params: { category: string };
-};
+interface CategoryPageProps {
+  params: {
+    category: string;
+  };
+}
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
   const categoryTitle = decodeURIComponent(params.category).replace(/-/g, ' ');
   return {
     title: `Category: ${categoryTitle.charAt(0).toUpperCase() + categoryTitle.slice(1)}`,
@@ -15,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function CategoryPage({ params }: Props) {
+export default async function CategoryPage({ params }: CategoryPageProps) {
   const categoryTitle = decodeURIComponent(params.category).replace(/-/g, ' ');
   const posts = await getPostsByCategory(categoryTitle);
   const categories = await getCategories();
