@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { notFound } from 'next/navigation';
+import { useParams, notFound } from 'next/navigation';
 import { getPost, getPosts, urlFor, dataAiHintMap } from '@/lib/data';
 import type { Post } from '@/types';
 import Image from 'next/image';
@@ -17,21 +17,20 @@ import { ActionToolbar } from '@/components/blog/ActionToolbar';
 import { CommentsSection } from '@/components/blog/CommentsSection';
 import { Skeleton } from '@/components/ui/skeleton';
 
-interface PostPageProps {
-  params: {
-    slug: string;
-  };
-}
-
-export default function PostPage({ params }: PostPageProps) {
+export default function PostPage() {
   const [post, setPost] = useState<Post | null>(null);
   const [recentPosts, setRecentPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const params = useParams();
+  const slug = params.slug as string;
+
   useEffect(() => {
+    if (!slug) return;
+
     async function fetchData() {
       setLoading(true);
-      const fetchedPost = await getPost(params.slug);
+      const fetchedPost = await getPost(slug);
       if (!fetchedPost) {
         notFound();
         return;
@@ -45,7 +44,7 @@ export default function PostPage({ params }: PostPageProps) {
       setLoading(false);
     }
     fetchData();
-  }, [params.slug]);
+  }, [slug]);
 
   if (loading) {
     return (

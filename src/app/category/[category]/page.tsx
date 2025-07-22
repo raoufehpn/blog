@@ -2,24 +2,18 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { notFound } from 'next/navigation';
+import { useParams, notFound } from 'next/navigation';
 import { getPostsByCategory } from '@/lib/data';
 import { PostCard } from '@/components/blog/PostCard';
 import type { Post } from '@/types';
 import { Skeleton } from '@/components/ui/skeleton';
 
-// This is the simplified props definition that should resolve the build error.
-interface CategoryPageProps {
-  params: {
-    category: string;
-  };
-}
-
-export default function CategoryPage({ params }: CategoryPageProps) {
+export default function CategoryPage() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   
-  const { category: categorySlug } = params;
+  const params = useParams();
+  const categorySlug = params.category as string;
   
   const displayTitle = categorySlug === 'all' 
     ? "All Categories" 
