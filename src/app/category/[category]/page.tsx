@@ -4,25 +4,54 @@ import type { Metadata } from 'next';
 import { PostCard } from '@/components/blog/PostCard';
 import { notFound } from 'next/navigation';
 
-export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
-  const categoryTitle = decodeURIComponent(params.category).replace(/-/g, ' ');
+type CategoryPageProps = {
+  params: {
+    category: string;
+  };
+};
+
+// Generates static paths for each category, improving performance
+export async function generateStaticParams() {
+  const categories = await getCategories();
+  const paths = categories.map((category) => ({
+    category: category.title.toLowerCase().replace(/\s+/g, '-'),
+  }));
+  // Add a path for "All Categories"
+  paths.push({ category: 'all' });
+  return paths;
+}
+
+export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
+  const categorySlug = params.category;
+  if (!categorySlug) return {};
+
+  const categoryTitle = decodeURIComponent(categorySlug).replace(/-/g, ' ');
+  const displayTitle = categorySlug === 'all'
+    ? 'All Categories'
+    : categoryTitle.charAt(0).toUpperCase() + categoryTitle.slice(1);
+
   return {
-    title: `Category: ${categoryTitle.charAt(0).toUpperCase() + categoryTitle.slice(1)}`,
-    description: `Posts categorized under ${categoryTitle}.`,
+    title: `Category: ${displayTitle}`,
+    description: `Posts categorized under ${displayTitle}.`,
   };
 }
 
-export default async function CategoryPage({ params }: { params: { category: string } }) {
-  const categoryTitle = decodeURIComponent(params.category).replace(/-/g, ' ');
-  const posts = await getPostsByCategory(categoryTitle);
-  const categories = await getCategories();
+export default async function CategoryPage({ params }: CategoryPageProps) {
+  const categorySlug = params.category;
+  const categoryTitle = decodeURIComponent(categorySlug).replace(/-/g, ' ');
   
-  const categoryExists = categories.some(c => c.title.toLowerCase() === categoryTitle.toLowerCase());
-  if (params.category !== 'all' && !categoryExists) {
-    notFound();
+  const posts = await getPostsByCategory(categoryTitle);
+  
+  // Verify if the category exists, unless it's the "all" page
+  if (categorySlug !== 'all') {
+    const categories = await getCategories();
+    const categoryExists = categories.some(c => c.title.toLowerCase() === categoryTitle.toLowerCase());
+    if (!categoryExists) {
+      notFound();
+    }
   }
   
-  const displayTitle = params.category === 'all' 
+  const displayTitle = categorySlug === 'all' 
     ? "All Categories" 
     : categoryTitle.charAt(0).toUpperCase() + categoryTitle.slice(1);
   
@@ -32,7 +61,7 @@ export default async function CategoryPage({ params }: { params: { category: str
         <p className="text-primary font-semibold font-headline">Category</p>
         <h1 className="text-5xl font-bold font-headline tracking-tighter text-balance">{displayTitle}</h1>
         <p className="text-muted-foreground mt-2 text-lg max-w-2xl mx-auto">
-          {params.category === 'all'
+          {categorySlug === 'all'
             ? 'Browse all articles from every category.'
             : `Exploring topics related to ${displayTitle}.`}
         </p>
