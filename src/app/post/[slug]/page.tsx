@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -23,6 +24,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
 
   useEffect(() => {
     async function fetchData() {
+      setLoading(true);
       const fetchedPost = await getPost(params.slug);
       if (!fetchedPost) {
         notFound();
@@ -62,7 +64,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
   }
 
   if (!post) {
-    return null; // notFound() is called in useEffect
+    return null; 
   }
 
   const postImageUrl = urlFor(post.coverImage);

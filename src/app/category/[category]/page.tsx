@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -24,6 +25,7 @@ export default function CategoryPage({ params }: { params: { category: string } 
     }
 
     async function fetchData() {
+      setLoading(true);
       const categoryTitle = decodeURIComponent(categorySlug).replace(/-/g, ' ');
       const fetchedPosts = await getPostsByCategory(categoryTitle);
       setPosts(fetchedPosts);
