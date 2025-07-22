@@ -45,16 +45,22 @@ export function ActionToolbar() {
             variant="ghost"
             size="sm"
             onClick={action.onClick}
-            className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
+            className="flex items-center gap-2 text-muted-foreground hover:text-foreground focus-visible:ring-0 focus-visible:ring-offset-0"
           >
-            <action.icon className={cn('h-5 w-5', action.isActive && 'fill-current text-red-500')} />
+            <action.icon 
+              className={cn(
+                'h-5 w-5 transition-all duration-200 group-hover:scale-110', 
+                action.isActive && 'fill-current text-red-500',
+                action.label === 'Save' && action.isActive && 'fill-current text-yellow-500'
+              )} 
+            />
             <span className="hidden sm:inline">{action.label}</span>
             <span className="font-semibold text-sm">{action.count}</span>
           </Button>
         ))}
       </div>
-      <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
-        <Share2 className="h-5 w-5 mr-2" />
+      <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground focus-visible:ring-0 focus-visible:ring-offset-0">
+        <Share2 className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform" />
         <span className="hidden sm:inline">Share</span>
       </Button>
     </div>

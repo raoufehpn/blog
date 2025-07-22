@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { useState } from 'react';
+import { Separator } from '../ui/separator';
 
 const navLinks = [
   { href: '/posts', label: 'All Posts' },
@@ -35,7 +36,8 @@ export function Header() {
             </Link>
         </div>
         
-        <div className="md:hidden ml-auto">
+        <div className="md:hidden ml-auto flex items-center gap-2">
+          <ThemeToggle />
           <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" className="px-2" aria-label="Toggle Menu">
