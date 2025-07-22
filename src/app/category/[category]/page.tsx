@@ -4,10 +4,6 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import CategoryClientPage from './CategoryClientPage';
 
-type Props = {
-  params: { category: string };
-};
-
 export async function generateStaticParams() {
   const categories = await getCategories();
   const paths = categories.map((category) => ({
@@ -17,7 +13,7 @@ export async function generateStaticParams() {
   return paths;
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
   const categorySlug = params.category;
   if (!categorySlug) return {};
 
@@ -32,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function CategoryPage({ params }: Props) {
+export default async function CategoryPage({ params }: { params: { category: string } }) {
   const categorySlug = params.category;
   const categoryTitle = decodeURIComponent(categorySlug).replace(/-/g, ' ');
   

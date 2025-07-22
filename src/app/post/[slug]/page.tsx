@@ -4,10 +4,6 @@ import { notFound } from 'next/navigation';
 import { getPost, getPosts, urlFor } from '@/lib/data';
 import PostClientPage from './PostClientPage';
 
-type Props = {
-  params: { slug: string };
-};
-
 export async function generateStaticParams() {
   const posts = await getPosts();
   return posts.map(post => ({
@@ -15,7 +11,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const post = await getPost(params.slug);
   if (!post) {
     return {};
@@ -41,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function PostPage({ params }: Props) {
+export default async function PostPage({ params }: { params: { slug: string } }) {
   const post = await getPost(params.slug);
   const allPosts = await getPosts();
 
