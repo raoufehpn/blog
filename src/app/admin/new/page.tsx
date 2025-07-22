@@ -1,4 +1,3 @@
-
 'use client';
 import { withAdminAuth } from '@/components/auth/withAdminAuth';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -9,8 +8,35 @@ import { Button } from '@/components/ui/button';
 import { createPost } from '@/app/auth/actions';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import { useFormState } from 'react-dom';
+import { useEffect } from 'react';
+import { useToast } from '@/hooks/use-toast';
+import { redirect } from 'next/navigation';
+
+const initialState = {
+  message: '',
+};
 
 function NewPostPage() {
+  const { toast } = useToast();
+  const [state, formAction] = useFormState(createPost, initialState);
+
+  useEffect(() => {
+    if (state?.message.includes('successfully')) {
+      toast({
+        title: 'Success',
+        description: state.message,
+      });
+      redirect('/admin');
+    } else if (state?.message) {
+      toast({
+        title: 'Error',
+        description: state.message,
+        variant: 'destructive',
+      });
+    }
+  }, [state, toast]);
+
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="mb-8">
@@ -28,7 +54,7 @@ function NewPostPage() {
           <CardDescription>Fill out the details below to publish a new article.</CardDescription>
         </CardHeader>
         <CardContent>
-          <form action={createPost} className="grid gap-6">
+          <form action={formAction} className="grid gap-6">
             <div className="grid gap-2">
               <Label htmlFor="title">Title</Label>
               <Input id="title" name="title" placeholder="Your post title" required />

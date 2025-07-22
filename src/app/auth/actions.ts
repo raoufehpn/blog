@@ -1,18 +1,21 @@
-
 "use server";
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { supabase } from "@/lib/supabase";
 
-export async function createPost(formData: FormData) {
-  // This is a mock function for the preview app.
-  // It doesn't actually save to a database but simulates the action.
+export async function createPost(prevState: any, formData: FormData) {
   const title = formData.get('title') as string;
+  
+  if (!title) {
+    return { message: 'Title is required.' };
+  }
+
+  // This is a mock function. In a real app, you would save to a database.
   console.log("Creating new post with title:", title);
   
-  // In a real app, you would add the data to your database here.
-  
   revalidatePath('/admin');
-  redirect('/admin?message=Post+created+successfully');
+  // Instead of redirecting here, we'll return a success message.
+  // The component will handle the redirection.
+  // redirect('/admin'); 
+  return { message: `Post "${title}" created successfully` };
 }
