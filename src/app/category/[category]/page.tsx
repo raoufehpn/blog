@@ -1,26 +1,27 @@
 
-import { getPostsByCategory, getCategories } from '@/lib/data';
 import type { Metadata } from 'next';
+import { getCategories, getPostsByCategory } from '@/lib/data';
 import { PostCard } from '@/components/blog/PostCard';
 import { notFound } from 'next/navigation';
 
+// Define the props type for the page component
 type CategoryPageProps = {
   params: {
     category: string;
   };
 };
 
-// Generates static paths for each category, improving performance
+// Generate static paths for better performance
 export async function generateStaticParams() {
   const categories = await getCategories();
   const paths = categories.map((category) => ({
     category: category.title.toLowerCase().replace(/\s+/g, '-'),
   }));
-  // Add a path for "All Categories"
   paths.push({ category: 'all' });
   return paths;
 }
 
+// Generate metadata for the page
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
   const categorySlug = params.category;
   if (!categorySlug) return {};
@@ -36,13 +37,13 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   };
 }
 
-export default async function CategoryPage({ params }: CategoryPageProps) {
+// The page component
+const CategoryPage = async ({ params }: CategoryPageProps) => {
   const categorySlug = params.category;
   const categoryTitle = decodeURIComponent(categorySlug).replace(/-/g, ' ');
   
   const posts = await getPostsByCategory(categoryTitle);
   
-  // Verify if the category exists, unless it's the "all" page
   if (categorySlug !== 'all') {
     const categories = await getCategories();
     const categoryExists = categories.some(c => c.title.toLowerCase() === categoryTitle.toLowerCase());
@@ -82,3 +83,5 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     </div>
   );
 }
+
+export default CategoryPage;
