@@ -1,4 +1,6 @@
+'use client';
 
+import { useState, useEffect } from 'react';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,11 +9,8 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Linkedin, Facebook } from 'lucide-react';
 import { getAuthor, urlFor } from '@/lib/data';
-
-export const metadata: Metadata = {
-  title: 'About',
-  description: 'Learn more about the author of this blog.',
-};
+import type { Author } from '@/types';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const XLogo = (props: React.SVGProps<SVGSVGElement>) => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -20,8 +19,54 @@ const XLogo = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 
-export default async function AboutPage() {
-    const author = await getAuthor();
+export default function AboutPage() {
+    const [author, setAuthor] = useState<Author | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function fetchData() {
+            const fetchedAuthor = await getAuthor();
+            setAuthor(fetchedAuthor);
+            setLoading(false);
+        }
+        fetchData();
+    }, []);
+
+    if (loading) {
+        return (
+             <div className="container mx-auto px-4 py-12">
+                <header className="text-center mb-12">
+                    <Skeleton className="h-12 w-1/2 mx-auto" />
+                    <Skeleton className="h-6 w-1/3 mx-auto mt-4" />
+                </header>
+                <div className="max-w-4xl mx-auto">
+                    <Card className="overflow-hidden">
+                        <div className="md:flex">
+                            <div className="md:w-1/3 bg-secondary p-8 flex flex-col items-center justify-center">
+                                <Skeleton className="w-32 h-32 rounded-full" />
+                                <Skeleton className="h-8 w-32 mt-4" />
+                                <div className="flex space-x-2 mt-4">
+                                    <Skeleton className="h-10 w-10" />
+                                    <Skeleton className="h-10 w-10" />
+                                    <Skeleton className="h-10 w-10" />
+                                </div>
+                            </div>
+                            <div className="md:w-2/3 p-8">
+                                <CardHeader>
+                                    <Skeleton className="h-10 w-24" />
+                                </CardHeader>
+                                <CardContent>
+                                    <Skeleton className="h-5 w-full mb-2" />
+                                    <Skeleton className="h-5 w-full mb-2" />
+                                    <Skeleton className="h-5 w-4/5" />
+                                </CardContent>
+                            </div>
+                        </div>
+                    </Card>
+                </div>
+            </div>
+        )
+    }
 
     if (!author) {
         return <div className="container mx-auto px-4 py-8">Author not found.</div>
