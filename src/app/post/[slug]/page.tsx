@@ -1,3 +1,4 @@
+
 import { getPost, getPosts } from '@/lib/data';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
@@ -13,12 +14,11 @@ import { Separator } from '@/components/ui/separator';
 import { ActionToolbar } from '@/components/blog/ActionToolbar';
 import { CommentsSection } from '@/components/blog/CommentsSection';
 
-type Props = {
+interface PostPageProps {
   params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
+}
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
   const post = await getPost(params.slug);
   if (!post) {
     return {};
@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function PostPage({ params }: Props) {
+export default async function PostPage({ params }: PostPageProps) {
   const post = await getPost(params.slug);
   const allPosts = await getPosts();
 
