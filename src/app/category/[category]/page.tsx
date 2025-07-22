@@ -8,11 +8,18 @@ import { PostCard } from '@/components/blog/PostCard';
 import type { Post } from '@/types';
 import { Skeleton } from '@/components/ui/skeleton';
 
-export default function CategoryPage({ params }: { params: { category: string } }) {
+// This is the simplified props definition that should resolve the build error.
+interface CategoryPageProps {
+  params: {
+    category: string;
+  };
+}
+
+export default function CategoryPage({ params }: CategoryPageProps) {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   
-  const categorySlug = params.category;
+  const { category: categorySlug } = params;
   
   const displayTitle = categorySlug === 'all' 
     ? "All Categories" 

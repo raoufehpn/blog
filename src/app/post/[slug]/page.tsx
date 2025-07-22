@@ -17,7 +17,13 @@ import { ActionToolbar } from '@/components/blog/ActionToolbar';
 import { CommentsSection } from '@/components/blog/CommentsSection';
 import { Skeleton } from '@/components/ui/skeleton';
 
-export default function PostPage({ params }: { params: { slug: string } }) {
+interface PostPageProps {
+  params: {
+    slug: string;
+  };
+}
+
+export default function PostPage({ params }: PostPageProps) {
   const [post, setPost] = useState<Post | null>(null);
   const [recentPosts, setRecentPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
