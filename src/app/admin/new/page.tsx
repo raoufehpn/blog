@@ -1,5 +1,4 @@
 'use client';
-import { withAdminAuth } from '@/components/auth/withAdminAuth';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -87,4 +86,4 @@ function NewPostPage() {
   );
 }
 
-export default withAdminAuth(NewPostPage);
+export default NewPostPage;

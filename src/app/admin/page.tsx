@@ -1,6 +1,5 @@
 'use client';
 
-import { withAdminAuth } from '@/components/auth/withAdminAuth';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
@@ -138,4 +137,4 @@ function AdminDashboardPage() {
   );
 }
 
-export default withAdminAuth(AdminDashboardPage);
+export default AdminDashboardPage;
