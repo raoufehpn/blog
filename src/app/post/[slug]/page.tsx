@@ -14,11 +14,7 @@ import { Separator } from '@/components/ui/separator';
 import { ActionToolbar } from '@/components/blog/ActionToolbar';
 import { CommentsSection } from '@/components/blog/CommentsSection';
 
-interface PostPageProps {
-  params: { slug: string };
-}
-
-export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const post = await getPost(params.slug);
   if (!post) {
     return {};
@@ -48,7 +44,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
   };
 }
 
-const PostPage = async ({ params }: PostPageProps) => {
+export default async function PostPage({ params }: { params: { slug: string } }) {
   const post = await getPost(params.slug);
   const allPosts = await getPosts();
 
@@ -126,5 +122,3 @@ const PostPage = async ({ params }: PostPageProps) => {
     </div>
   );
 }
-
-export default PostPage;
