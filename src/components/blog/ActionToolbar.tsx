@@ -45,7 +45,7 @@ export function ActionToolbar() {
             variant="ghost"
             size="sm"
             onClick={action.onClick}
-            className="flex items-center gap-2 text-muted-foreground hover:text-foreground focus-visible:ring-0 focus-visible:ring-offset-0"
+            className="flex items-center gap-2 text-muted-foreground hover:text-foreground focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none focus-visible:outline-none"
           >
             <action.icon 
               className={cn(
@@ -59,7 +59,7 @@ export function ActionToolbar() {
           </Button>
         ))}
       </div>
-      <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground focus-visible:ring-0 focus-visible:ring-offset-0">
+      <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none focus-visible:outline-none">
         <Share2 className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform" />
         <span className="hidden sm:inline">Share</span>
       </Button>
