@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
   };
 }
 
-export default async function PostPage({ params }: PostPageProps) {
+const PostPage = async ({ params }: PostPageProps) => {
   const post = await getPost(params.slug);
   const allPosts = await getPosts();
 
@@ -126,3 +126,5 @@ export default async function PostPage({ params }: PostPageProps) {
     </div>
   );
 }
+
+export default PostPage;

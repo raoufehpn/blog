@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   };
 }
 
-export default async function CategoryPage({ params }: CategoryPageProps) {
+const CategoryPage = async ({ params }: CategoryPageProps) => {
   const categoryTitle = decodeURIComponent(params.category).replace(/-/g, ' ');
   const posts = await getPostsByCategory(categoryTitle);
   const categories = await getCategories();
@@ -57,3 +57,5 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     </div>
   );
 }
+
+export default CategoryPage;
